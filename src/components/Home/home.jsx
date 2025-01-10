@@ -5,6 +5,8 @@ import { FaPlay, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { SlideRight } from "@/../utils/animation";
 import { useRouter } from "next/navigation";
+import hero from "@/assets/hero.png";
+
 
 const Home = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -61,7 +63,7 @@ const Home = () => {
             initial={{ opacity: 0, x: 200 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
-            src="/assets/hero.png"
+            src={hero}
             alt=""
             className="w-[350px] h-auto md:w-[550px] xl:w-[700px]"
           />
