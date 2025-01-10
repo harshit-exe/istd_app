@@ -11,10 +11,11 @@ import { SlideLeft } from "@/../utils/animation";
 const WhyChooseData = [
   {
     id: 1,
-    title: "Resume Optimization Tool",
-    desc: "Unlock your full potential with our AI-powered Resume Builder, designed to help you create a standout professional profile tailored to your career goals. ",
-    icon: <IoIosDocument />,
-    bgColor: "#0063ff",
+    title: "VR Mock Interviews ",
+    desc: "Welcome to our comprehensive job portal designed to connect talented individuals with diverse career opportunities across all professions.",
+    link: "/",
+    icon: <Glasses/>,
+    bgColor: "#fa6400",
     delay: 0.3,
   },
   {
@@ -28,11 +29,10 @@ const WhyChooseData = [
   },
   {
     id: 3,
-    title: "VR Mock Interviews ",
-    desc: "Welcome to our comprehensive job portal designed to connect talented individuals with diverse career opportunities across all professions.",
-    link: "/",
-    icon: <Glasses/>,
-    bgColor: "#fa6400",
+    title: "Resume Optimization Tool",
+    desc: "Unlock your full potential with our AI-powered Resume Builder, designed to help you create a standout professional profile tailored to your career goals. ",
+    icon: <IoIosDocument />,
+    bgColor: "#0063ff",
     delay: 0.9,
   },
   {

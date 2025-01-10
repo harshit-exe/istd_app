@@ -33,7 +33,7 @@ export default function NavBar() {
   }, []);
 
   return (
-    <header className="relative z-10">
+    <header className="relative z-10 bg-slate-50">
       <div className="flex justify-between items-center p-4 max-w-7xl mx-auto">
         <div className="text-2xl font-bold text-purple-800">LEARNfromHOME</div>
         <nav className="hidden md:flex space-x-8 lg:space-x-16">
