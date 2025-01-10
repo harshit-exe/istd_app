@@ -58,7 +58,7 @@ export function CourseSidebar() {
 
 
   const [data, setData] = useState([])
-  
+
   const fetchUser = async () => {
     const response = await fetch(`${BaseApiUrl}/user/`, {
       method: 'GET',
@@ -68,30 +68,12 @@ export function CourseSidebar() {
       },
     });
 
-    if (!response.ok) {
-      // If the response is not OK (e.g., 401 Unauthorized), handle it
-      localStorage.removeItem('token');
-      // router.push("/");
-    }
+   
 
     const json = await response.json();
     if (json) {
       console.log(json);
-      if (json.error) {
-        localStorage.removeItem('token');
-        router.push("/");
-      } else {
-
-        let newData = {
-
-          userName: json?.user?.userName,
-          userId: json.user.id,
-          role: json.user.roleName,
-          email: json.user.email
-
-        }
-        setData(newData)
-      }
+     
 
       // dispatch(setUser(json.user));
     }
