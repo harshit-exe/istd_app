@@ -116,7 +116,7 @@ export function CourseSidebar() {
                   transition={{ duration: 0.2 }}
                 >
                   <h2 className="text-lg font-semibold">
-                    <span className="text-blue-700">CodePathshala</span>
+                    <span className="text-blue-700">Campus++</span>
                   </h2>
                   <p className="text-sm text-muted-foreground">for {data?.username}</p>
                 </motion.div>

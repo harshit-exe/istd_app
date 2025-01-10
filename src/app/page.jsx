@@ -9,8 +9,10 @@ const page = () => {
     <>
       <div className="overflow-x-hidden">
         <NavBar />
-        <Home/>
-        <WhyChooseUs/>
+        <div className="ml-0 md:ml-20">
+          <Home />
+          <WhyChooseUs />
+        </div>
       </div>
     </>
   );

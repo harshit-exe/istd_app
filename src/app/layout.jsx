@@ -4,8 +4,8 @@ import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
 
 export const metadata = {
-  title: "CodePathshala",
-  description: "CodePathshala help to devlop new skills for Student.",
+  title: "Campus++",
+  description: "Campus++ help to devlop new skills for Student.",
 };
 
 
