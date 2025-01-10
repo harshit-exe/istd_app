@@ -34,7 +34,7 @@ const ResumeBuilder = () => {
         console.log(json);
         if(json.error){
           localStorage.removeItem('token');
-        router.push("/");
+        
         }else{
   
           let newData = {
