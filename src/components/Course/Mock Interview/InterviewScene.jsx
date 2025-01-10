@@ -1,39 +1,14 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { useFaceTracking } from '@/hooks/useFaceTracking'
 import { Button } from '@/components/ui/button'
 
 export function InterviewScene({ onFaceDataUpdate }) {
   const videoRef = useRef(null)
-  const { startTracking, stopTracking, faceData, error, useFallback } = useFaceTracking()
-  const [retryCount, setRetryCount] = useState(0)
+  
 
-  useEffect(() => {
-    let interval
-    const initializeTracking = async () => {
-      if (videoRef.current) {
-        try {
-          await startTracking(videoRef.current)
-          interval = setInterval(() => useFallback ? 2000 : 100)
-        } catch (err) {
-          console.error('Failed to initialize tracking:', err)
-        }
-      }
-    }
+  
 
-    initializeTracking()
-
-    return () => {
-      if (interval) clearInterval(interval)
-      stopTracking()
-    }
-  }, [startTracking, stopTracking, retryCount, useFallback])
-
-  useEffect(() => {
-    if (faceData) {
-      onFaceDataUpdate(faceData)
-    }
-  }, [faceData, onFaceDataUpdate])
-
+    
+ 
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({ video: true })
       .then(stream => {
@@ -44,9 +19,6 @@ export function InterviewScene({ onFaceDataUpdate }) {
       .catch(err => console.error("Error accessing the camera", err))
   }, [])
 
-  const handleRetry = () => {
-    setRetryCount(prev => prev + 1)
-  }
 
   return (
     <div className="relative w-full h-full">
