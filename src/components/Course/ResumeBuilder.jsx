@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef,useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -9,7 +9,110 @@ import Link from "next/link"
 import { useRouter } from 'next/navigation'
 import { BaseApiUrl } from '@/utils/constanst';
 
-const ResumeBuilder = ({data}) => {
+const ResumeBuilder = () => {
+
+
+
+    const [data, setData] = useState([])
+    const fetchUserdata = async () => {
+      const response = await fetch(`${BaseApiUrl}/user/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+  
+      if (!response.ok) {
+        // If the response is not OK (e.g., 401 Unauthorized), handle it
+        localStorage.removeItem('token');
+        // router.push("/");
+      }
+  
+      const json = await response.json();
+      if (json) {
+        console.log(json);
+        if(json.error){
+          localStorage.removeItem('token');
+        router.push("/");
+        }else{
+  
+          let newData = {
+            
+            userName: json?.user?.user.userName,
+            userId: json.user.user.id,
+            role: json.user.roleName,
+            email: json.user.user.email
+            
+          }
+
+
+
+
+
+
+
+
+          const response = await fetch(`${BaseApiUrl}/resume/`, {
+            method: 'GET',
+            headers: {
+              'userid': json.user.user.id
+            }
+          })
+      
+      
+          const json2 = await response.json();
+          console.log('resuemdata fetch',json,json.user.user.id);
+          
+          if (json2) {
+            if (json2.resume.length !== 0) {
+              console.log(json2.resume[0].data[0]);
+              let newdata = json2.resume[0].data[0]
+      
+              setResume({
+                personalInfo: {
+                  name: newdata.personalInfo.name,
+                  email: newdata.personalInfo.email,
+                  phone: newdata.personalInfo.phone,
+                  location: newdata.personalInfo.location,
+                },
+                summary: newdata.summary,
+                experience: newdata.experience,
+                // experience: [{ company: '', position: '', duration: '', description: '' }],
+                education: newdata.education,
+                skills: newdata.skills,
+              })
+            }
+            // dispatch(setUser(json.user));
+          }
+
+
+
+
+
+
+
+
+
+          setData(newData)
+        }
+  
+        // dispatch(setUser(json.user));
+      }
+    }
+  
+  
+    useEffect(() => {
+      fetchUserdata()
+      fetchUser()
+    }, [])
+
+
+
+
+
+
+
   const router = useRouter()
   const [resume, setResume] = useState({
     personalInfo: {
@@ -103,72 +206,68 @@ const ResumeBuilder = ({data}) => {
     }))
   }
 
-   const handleSubmit = async (e) => {
-  //   e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-  //   const response = await fetch(`${BaseApiUrl}/resume`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({ userid: data?.userId, data: resume })
-  //   });
-  //   const json = await response.json();
-  //   console.log(data.userId,resume);
-    
-  //   if (json) {
-  //     console.log( "working",json);
-      
-    
-  //     router.push(`/resume/${data.userId}`)
+    const response = await fetch(`${BaseApiUrl}/resume/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userid: data?.userId, data: resume })
+    });
+    const json = await response.json();
+    console.log(data.userId, resume);
+
+    if (json) {
+      console.log("data send working", json);
+
+
+      router.push(`/courses/resume/${data.userId}`)
     }
+
+  }
+
+
+
+  const fetchUser = async () => {
+    const response = await fetch(`${BaseApiUrl}/resume/`, {
+      method: 'GET',
+      headers: {
+        'userid': data?.userId
+      }
+    })
+
+
+    const json = await response.json();
+    console.log('resuemdata fetch',json);
     
-  // }
+    if (json) {
+      if (json.resume.length !== 0) {
+        console.log(json.resume[0].data[0]);
+        let newdata = json.resume[0].data[0]
 
-
-
-   const fetchUser = async () => {
-  //   const response = await fetch(`${BaseApiUrl}/resume`, {
-  //     method: 'GET',
-  //     headers: {
-  //       'userid':data.userId
-  //     }
-    };
-
-  
-
-    // const json = await response.json();
-    // if (json) {
-    //   if(json.resume.length !== 0){
-    //     console.log(json.resume[0].data[0]);
-    //     let newdata = json.resume[0].data[0]
-  
-    //     setResume({
-    //       personalInfo: {
-    //         name: newdata.personalInfo.name,
-    //         email: newdata.personalInfo.email,
-    //         phone: newdata.personalInfo.phone,
-    //         location: newdata.personalInfo.location,
-    //       },
-    //       summary: newdata.summary,
-    //       experience: newdata.experience,
-    //       // experience: [{ company: '', position: '', duration: '', description: '' }],
-    //       education: newdata.education,
-    //       skills: newdata.skills,
-    //     })
-    //   }
-     
-    
- 
-
+        setResume({
+          personalInfo: {
+            name: newdata.personalInfo.name,
+            email: newdata.personalInfo.email,
+            phone: newdata.personalInfo.phone,
+            location: newdata.personalInfo.location,
+          },
+          summary: newdata.summary,
+          experience: newdata.experience,
+          // experience: [{ company: '', position: '', duration: '', description: '' }],
+          education: newdata.education,
+          skills: newdata.skills,
+        })
+      }
       // dispatch(setUser(json.user));
-  //   }
-  // }
+    }
+  }
 
 
-  // useEffect(() => {
-  //   fetchUser()
-  // }, [])
+
+
 
   return (
     <motion.div
@@ -177,9 +276,9 @@ const ResumeBuilder = ({data}) => {
       className="bg-white rounded-lg shadow p-6 w-full "
     >
       <div >
-        <Link target='_blank' href={`/resume/`}><Button type="button" >
-            View Resume
-          </Button></Link>
+        <Link target='_blank' href={`/courses/resume/${data.userId}`}><Button type="button" >
+          View Resume
+        </Button></Link>
       </div>
       <h2 className="text-2xl font-semibold mb-6">Resume Builder</h2>
       <form onSubmit={handleSubmit}>

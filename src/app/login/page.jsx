@@ -5,6 +5,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 // import { useNavigate } from 'react-router-dom';
 import { useRouter } from 'next/navigation'
+import { BaseApiUrl } from '@/utils/constanst';
 
 
 export default function page() {
@@ -19,7 +20,7 @@ export default function page() {
         console.log(res.email);
         console.log(res.name);
 
-        const response = await fetch(`http://localhost:4000/api/user/`, {
+        const response = await fetch(`${BaseApiUrl}/user/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
