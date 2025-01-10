@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
         <SidebarInset className="flex-1 flex flex-col">
           <header className="flex h-16 items-center gap-4 border-b px-6 bg-background">
             <SidebarTrigger />
-            <h1 className="text-xl font-semibold">CodePathshala Dashboard</h1>
+            <h1 className="text-xl font-semibold">LEARNfromHOME Dashboard</h1>
           </header>
           <main className="flex-1 mx-auto overflow-auto p-6">
             {children} 
