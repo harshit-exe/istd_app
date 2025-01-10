@@ -39,13 +39,26 @@ export default function MentorCards() {
   const joinMeeting = async (roomID) => {
 
     const url = `/meeting/${roomID}`
-    var mylink = `https://istd-app.vercel.app/${url}`
+    // var mylink = `https://istd-app.vercel.app${url}`
+
+
+    var message = `Hello, Harshit here!
+
+✨ Mentor Availability:
+The mentor is now available for a mentoring session.
+
+📌 Join Now:
+Click the link below to start your session:
+https://istd-app.vercel.app${url}
+
+🔖 Brought to you by:
+Campus++ Team`
     const response = await fetch(`${BaseApiUrl}/whatsapp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ phone: '9922041218', text:`Hi harshit here meeting link.${url}` }),
+      body: JSON.stringify({ phone: '9922041218', text:`Hi harshit here meeting link ${message}` }),
     });
     const json = await response.json();
 
@@ -67,7 +80,7 @@ export default function MentorCards() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ phone: '9922041218', text:`Hi harshit here Metaverse link.${url}` }),
+      body: JSON.stringify({ phone: '9922041218', text:`Hi harshit here Metaverse link ${url}` }),
     });
     const json = await response.json();
   }
