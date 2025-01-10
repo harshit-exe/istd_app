@@ -24,19 +24,17 @@ export default function NavBar() {
   }, []);
 
   return (
-    <header className="relative z-10 bg-slate-50">
-      <div className="flex justify-between items-center p-4 max-w-7xl mx-auto">
-        <div className="text-2xl font-bold text-purple-800">Campus++</div>
+    <header className="relative px-20 py-3 z-10">
+      <div className="flex justify-between items-center p-4 mx-auto">
+        <div className="text-2xl font-bold text-indigo-500">Campus++</div>
         <nav className="hidden md:flex space-x-8 lg:space-x-16">
-          <NavItem href="/">Home</NavItem>
-          <NavItem href="/dashboard/courses">Course</NavItem>
-          <NavItem href="/dashboard">Dashboard</NavItem>
+        
         </nav>
-        <div className="hidden md:flex space-x-2">
-          <Button variant="outline" asChild>
+        <div className="hidden md:flex gap-5 space-x-2">
+          <Button className="p-5 rounded-xl" variant="outline" asChild>
             <Link href={"/login"}>Login</Link>
           </Button>
-          <Button className="bg-indigo-500" variant="outline" asChild>
+          <Button className="bg-indigo-500 rounded-xl border-none text-white  p-5" variant="outline" asChild>
             <Link href={"/register"}>Get Started</Link>
           </Button>
         </div>
