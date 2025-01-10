@@ -23,21 +23,38 @@ export default function NavBar() {
     setIsMenuOpen((prev) => !prev);
   }, []);
 
+  const handleLogout = () => {
+    // router.push('/')
+    localStorage.clear()
+  }
+
   return (
     <header className="relative px-20 py-3 z-10">
       <div className="flex justify-between items-center p-4 mx-auto">
         <div className="text-2xl font-bold text-indigo-500">Campus++</div>
         <nav className="hidden md:flex space-x-8 lg:space-x-16">
-        
+
         </nav>
-        <div className="hidden md:flex gap-5 space-x-2">
-          <Button className="p-5 rounded-xl" variant="outline" asChild>
-            <Link href={"/login"}>Login</Link>
-          </Button>
-          <Button className="bg-indigo-500 rounded-xl border-none text-white  p-5" variant="outline" asChild>
-            <Link href={"/register"}>Get Started</Link>
-          </Button>
-        </div>
+        {localStorage.getItem('token') ? <>
+
+          <div className="hidden md:flex gap-5 space-x-2">
+            <Button className="p-5 rounded-xl" variant="outline" asChild>
+              <Link href={"/dashboard"}>Dashboard</Link>
+            </Button>
+            <Button onClick={handleLogout} className="bg-indigo-500 rounded-xl border-none text-white  p-5" variant="outline" asChild>
+              LogOut
+            </Button>
+          </div></> : <>
+
+          <div className="hidden md:flex gap-5 space-x-2">
+            <Button className="p-5 rounded-xl" variant="outline" asChild>
+              <Link href={"/login"}>Login</Link>
+            </Button>
+            <Button className="bg-indigo-500 rounded-xl border-none text-white  p-5" variant="outline" asChild>
+              <Link href={"/register"}>Get Started</Link>
+            </Button>
+          </div>
+        </>}
         <button
           className="md:hidden p-2"
           onClick={toggleMenu}
