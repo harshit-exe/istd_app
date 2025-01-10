@@ -10,18 +10,21 @@ import Image from "next/image"
 
 const mentors = [
   {
+    id:1,
     name: "Dr. Sarah Johnson",
     photo: "/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300&h=300",
     expertise: ["Frontend Development", "UI/UX Design"],
     description: "Expert in creating intuitive and responsive user interfaces with 10+ years of experience.",
   },
   {
+    id:2,
     name: "Michael Chen",
     photo: "/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=300&h=300",
     expertise: ["Backend Development", "Database Design"],
     description: "Specializes in scalable backend architectures and efficient database systems.",
   },
   {
+    id:3,
     name: "Emily Rodriguez",
     photo: "/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=300&h=300",
     expertise: ["Full Stack Development", "DevOps"],
@@ -31,6 +34,12 @@ const mentors = [
 
 export default function MentorCards() {
   const [selectedMentor, setSelectedMentor] = useState(null)
+  
+  const joinMeeting = (roomID) => {
+    const url = `/meeting/${roomID}`
+    window.open(url, '_blank')
+  }
+  console
 
   const handleVideoCall = (mentorName) => {
     setSelectedMentor(mentorName)
@@ -85,7 +94,9 @@ export default function MentorCards() {
             <CardFooter className="flex justify-between gap-4">
               <Button
                 className="flex-1 bg-purple-600 hover:bg-purple-700 text-white"
-                onClick={() => handleVideoCall(mentor.name)}
+                onClick={() =>{ 
+                  joinMeeting(mentor.id)
+                  handleVideoCall(mentor.name)}}
               >
                 <Video className="w-4 h-4 mr-2" />
                 Join Video Call

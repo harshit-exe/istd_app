@@ -29,9 +29,9 @@ const companyNav = [
   { name: "Mentoring", icon: Video, link: "/courses/mentor" },
   { name: "AI Mock Test", icon: BotMessageSquare, link: "/courses/mocktest" },
   { name: "Mock Interview", icon: Settings, link: "/courses/mockinterview" },
+  { name: "Roadmap", icon: Briefcase, link: "/courses/roadmap" },
   { name: "Discussion", icon: MessageSquareText, link: "/discussion" },
   { name: "AI Tutor", icon: BotMessageSquare, link: "/aitutor" },
-  { name: "Roadmap", icon: Briefcase, link: "/courses/roadmap" },
   { name: "Settings", icon: Settings, link: "/settings" },
 ];
 
