@@ -146,15 +146,17 @@ export function CourseSidebar() {
             <Building2 size={18} />
             <AnimatePresence>
               {state === "expanded" && (
+                <Link href={'/dashboard'}>
                 <motion.h2
                   className="font-medium"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.2 }}
-                >
-                  Harshit Nikam
+                  >
+                  {data?.username}
                 </motion.h2>
+                  </Link>
               )}
             </AnimatePresence>
           </motion.div>
