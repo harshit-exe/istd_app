@@ -22,6 +22,8 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar'
 import { Settings, AreaChartIcon as ChartArea, Building2, ClipboardList, ListChecks, LogOut, User, X, Focus, MessageSquareText, Video, Gamepad2, BotMessageSquare, Briefcase } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { BaseApiUrl } from '@/utils/constanst'
 
 const companyNav = [
   { name: "Courses", icon: ClipboardList, link: "/dashboard/courses"},
@@ -50,6 +52,58 @@ export function CourseSidebar() {
     expanded: { width: 240 },
     collapsed: { width: 0 },
   }
+
+
+
+
+
+   const [data, setData] = useState([])
+    const fetchUser = async () => {
+      const response = await fetch(`${BaseApiUrl}/user/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+  
+      if (!response.ok) {
+        // If the response is not OK (e.g., 401 Unauthorized), handle it
+        localStorage.removeItem('token');
+        // router.push("/");
+      }
+  
+      const json = await response.json();
+      if (json) {
+        console.log(json);
+        if(json.error){
+          localStorage.removeItem('token');
+        router.push("/");
+        }else{
+  
+          let newData = {
+            
+            userName: json?.user?.userName,
+            userId: json.user.id,
+            role: json.user.roleName,
+            email: json.user.email
+            
+          }
+          setData(newData)
+        }
+  
+        // dispatch(setUser(json.user));
+      }
+    }
+  
+  
+    useEffect(() => {
+      fetchUser()
+    }, [])
+  
+
+
+
 
   return (
     <motion.div
@@ -80,7 +134,7 @@ export function CourseSidebar() {
                   <h2 className="text-lg font-semibold">
                     <span className="text-blue-700">CodePathshala</span>
                   </h2>
-                  <p className="text-sm text-muted-foreground">for Learner</p>
+                  <p className="text-sm text-muted-foreground">for {data?.userName}</p>
                 </motion.div>
               )}
             </AnimatePresence>
