@@ -24,13 +24,13 @@ import {
 import { Settings, AreaChartIcon as ChartArea, Building2, ClipboardList, ListChecks, LogOut, User, X, Focus, MessageSquareText, Video, Gamepad2, BotMessageSquare, Briefcase } from 'lucide-react'
 
 const companyNav = [
-  { name: "Dashboard", icon: ChartArea, link: "/dashboard" },
-  { name: "Courses", icon: ClipboardList, link: "/courses" },
-  { name: "Assignments", icon: ListChecks, link: "/assignments", badge: 3 },
-  { name: "Live Classes", icon: Video, link: "/live-classes" },
+  { name: "Courses", icon: ClipboardList, link: "/courses"},
+  { name: "Resume Generator", icon: ListChecks, link: "courses/resume",  },
+  { name: "Mentoring", icon: Video, link: "/mentor" },
   { name: "Discussion", icon: MessageSquareText, link: "/discussion" },
-  { name: "AI Tutor", icon: BotMessageSquare, link: "/ai-tutor" },
-  { name: "Career", icon: Briefcase, link: "/career" },
+  { name: "AI Tutor", icon: BotMessageSquare, link: "/aitutor" },
+  { name: "Roadmap", icon: Briefcase, link: "/roadmap" },
+  { name: "Mock Interview", icon: Settings, link: "/mockinterview" },
   { name: "Settings", icon: Settings, link: "/settings" },
 ];
 
