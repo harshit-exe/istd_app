@@ -27,11 +27,11 @@ const companyNav = [
   { name: "Courses", icon: ClipboardList, link: "/courses"},
   { name: "Resume Generator", icon: ListChecks, link: "/courses/resume",  },
   { name: "Mentoring", icon: Video, link: "/courses/mentor" },
+  { name: "AI Mock Test", icon: BotMessageSquare, link: "/courses/mocktest" },
+  { name: "Mock Interview", icon: Settings, link: "/courses/mockinterview" },
   { name: "Discussion", icon: MessageSquareText, link: "/discussion" },
   { name: "AI Tutor", icon: BotMessageSquare, link: "/aitutor" },
-  { name: "AI Mock Test", icon: BotMessageSquare, link: "/courses/mocktest" },
-  { name: "Roadmap", icon: Briefcase, link: "/roadmap" },
-  { name: "Mock Interview", icon: Settings, link: "/courses/mockinterview" },
+  { name: "Roadmap", icon: Briefcase, link: "/courses/roadmap" },
   { name: "Settings", icon: Settings, link: "/settings" },
 ];
 
