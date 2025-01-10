@@ -43,7 +43,7 @@ export default function NavBar() {
         </nav>
         <div className="hidden md:flex space-x-2">
           <Button variant="outline">
-          <Link href={"/auth"}>Sign in</Link>
+          <Link href={"/login"}>Sign in</Link>
           </Button>
           
         </div>
@@ -75,7 +75,7 @@ export default function NavBar() {
           </nav>
           <div className="mt-4 space-y-2">
             <Button variant="outline" className="w-full">
-              <Link href={"/auth"}>Sign in</Link>
+              <Link href={"/login"}>Sign in</Link>
             </Button>
           </div>
         </div>
