@@ -58,7 +58,7 @@ export function CourseSidebar() {
 
 
   const [data, setData] = useState([])
-  
+
   const fetchUser = async () => {
     const response = await fetch(`${BaseApiUrl}/user/`, {
       method: 'GET',
@@ -68,30 +68,13 @@ export function CourseSidebar() {
       },
     });
 
-    if (!response.ok) {
-      // If the response is not OK (e.g., 401 Unauthorized), handle it
-      localStorage.removeItem('token');
-      // router.push("/");
-    }
+   
 
     const json = await response.json();
     if (json) {
       console.log(json);
-      if (json.error) {
-        localStorage.removeItem('token');
-        router.push("/");
-      } else {
-
-        let newData = {
-
-          userName: json?.user?.userName,
-          userId: json.user.id,
-          role: json.user.roleName,
-          email: json.user.email
-
-        }
-        setData(newData)
-      }
+      setData(json.user.user)
+     
 
       // dispatch(setUser(json.user));
     }
@@ -121,7 +104,7 @@ export function CourseSidebar() {
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarImage src={data?.pic} alt="@shadcn" />
               <AvatarFallback>CP</AvatarFallback>
             </Avatar>
             <AnimatePresence>
@@ -135,7 +118,7 @@ export function CourseSidebar() {
                   <h2 className="text-lg font-semibold">
                     <span className="text-blue-700">CodePathshala</span>
                   </h2>
-                  <p className="text-sm text-muted-foreground">for {data?.userName}</p>
+                  <p className="text-sm text-muted-foreground">for {data?.username}</p>
                 </motion.div>
               )}
             </AnimatePresence>
