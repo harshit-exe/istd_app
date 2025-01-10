@@ -39,6 +39,7 @@ export default function MentorCards() {
   const joinMeeting = async (roomID) => {
 
     const url = `/meeting/${roomID}`
+    var mylink = `https://istd-app.vercel.app/${url}`
     const response = await fetch(`${BaseApiUrl}/whatsapp`, {
       method: "POST",
       headers: {
@@ -56,9 +57,19 @@ export default function MentorCards() {
     window.open('https://example.com/video-call', '_blank')
   }
 
-  const handleMetaverseJoin = (mentorName) => {
+  const handleMetaverseJoin = async(mentorName) => {
     setSelectedMentor(mentorName)
     window.open('https://framevr.io/mentor', '_blank')
+    var url ='https://framevr.io/mentor'
+
+    const response = await fetch(`${BaseApiUrl}/whatsapp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ phone: '9922041218', text:`Hi harshit here Metaverse link.${url}` }),
+    });
+    const json = await response.json();
   }
 
   return (
