@@ -71,6 +71,6 @@ export function useFaceTracking() {
   }, [isTracking, stopTracking]);
 
 
-  return { startTracking, stopTracking, facePosition, error };
+  return { startTracking, stopTracking,  };
 }
 

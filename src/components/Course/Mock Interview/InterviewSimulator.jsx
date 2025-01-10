@@ -102,7 +102,7 @@ export function InterviewSimulator() {
   }, [aiError, voiceError]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white p-8">
+    <div className="flex flex-col items-center justify-center min-h-screen text-black p-8">
       <h1 className="text-4xl font-bold mb-8">AI-Powered Interview Simulator</h1>
 
       {error && (
@@ -131,15 +131,12 @@ export function InterviewSimulator() {
         </div>
       ) : (
         <div className="w-full max-w-4xl">
-          <div className="mb-8 flex flex-col md:flex-row gap-4">
-            <div className="w-full md:w-1/2 h-[300px] rounded-lg overflow-hidden bg-gray-100 relative">
+          <div className="mb-8 flex  flex-col md:flex-row gap-4">
+            <div className="w-1/2 h-[300px] rounded-lg overflow-hidden bg-gray-100 relative">
               <InterviewScene onDataUpdate={handleDataUpdate} />
             </div>
-            <div className="w-full md:w-1/2 h-[300px] bg-gray-800 rounded-lg p-4">
-              <BehaviorGraph data={behaviorData} />
-            </div>
           </div>
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+          <div className=" p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold mb-4">Current Question:</h2>
             <p className="text-xl mb-6">{currentQuestion}</p>
             <div className="mb-6">

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 
 export function InterviewScene({ onFaceDataUpdate }) {
   const videoRef = useRef(null)
-  const { startTracking, stopTracking, detectFace, faceData, error, useFallback } = useFaceTracking()
+  const { startTracking, stopTracking, faceData, error, useFallback } = useFaceTracking()
   const [retryCount, setRetryCount] = useState(0)
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export function InterviewScene({ onFaceDataUpdate }) {
       if (videoRef.current) {
         try {
           await startTracking(videoRef.current)
-          interval = setInterval(() => detectFace(videoRef.current), useFallback ? 2000 : 100)
+          interval = setInterval(() => useFallback ? 2000 : 100)
         } catch (err) {
           console.error('Failed to initialize tracking:', err)
         }
@@ -26,7 +26,7 @@ export function InterviewScene({ onFaceDataUpdate }) {
       if (interval) clearInterval(interval)
       stopTracking()
     }
-  }, [startTracking, stopTracking, detectFace, retryCount, useFallback])
+  }, [startTracking, stopTracking, retryCount, useFallback])
 
   useEffect(() => {
     if (faceData) {
