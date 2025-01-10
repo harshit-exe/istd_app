@@ -20,7 +20,7 @@ export default function page() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username: res.name, email: res.email }),
+      body: JSON.stringify({ username: res.name, email: res.email,pic: res.picture }),
     });
     const json = await response.json();
 

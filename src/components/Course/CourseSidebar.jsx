@@ -26,8 +26,8 @@ import { useEffect, useState } from 'react'
 import { BaseApiUrl } from '@/utils/constanst'
 
 const companyNav = [
-  { name: "Courses", icon: ClipboardList, link: "/dashboard/courses"},
-  { name: "Resume Generator", icon: ListChecks, link: "/dashboard/resume",  },
+  { name: "Courses", icon: ClipboardList, link: "/dashboard/courses" },
+  { name: "Resume Generator", icon: ListChecks, link: "/dashboard/resume", },
   { name: "Mentoring", icon: Video, link: "/dashboard/mentor" },
   { name: "AI Mock Test", icon: BotMessageSquare, link: "/dashboard/mocktest" },
   { name: "Mock Interview", icon: Settings, link: "/dashboard/mockinterview" },
@@ -57,50 +57,51 @@ export function CourseSidebar() {
 
 
 
-   const [data, setData] = useState([])
-    const fetchUser = async () => {
-      const response = await fetch(`${BaseApiUrl}/user/`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
+  const [data, setData] = useState([])
   
-      if (!response.ok) {
-        // If the response is not OK (e.g., 401 Unauthorized), handle it
-        localStorage.removeItem('token');
-        // router.push("/");
-      }
-  
-      const json = await response.json();
-      if (json) {
-        console.log(json);
-        if(json.error){
-          localStorage.removeItem('token');
-        router.push("/");
-        }else{
-  
-          let newData = {
-            
-            userName: json?.user?.userName,
-            userId: json.user.id,
-            role: json.user.roleName,
-            email: json.user.email
-            
-          }
-          setData(newData)
-        }
-  
-        // dispatch(setUser(json.user));
-      }
+  const fetchUser = async () => {
+    const response = await fetch(`${BaseApiUrl}/user/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+
+    if (!response.ok) {
+      // If the response is not OK (e.g., 401 Unauthorized), handle it
+      localStorage.removeItem('token');
+      // router.push("/");
     }
-  
-  
-    useEffect(() => {
-      fetchUser()
-    }, [])
-  
+
+    const json = await response.json();
+    if (json) {
+      console.log(json);
+      if (json.error) {
+        localStorage.removeItem('token');
+        router.push("/");
+      } else {
+
+        let newData = {
+
+          userName: json?.user?.userName,
+          userId: json.user.id,
+          role: json.user.roleName,
+          email: json.user.email
+
+        }
+        setData(newData)
+      }
+
+      // dispatch(setUser(json.user));
+    }
+  }
+
+
+  useEffect(() => {
+    fetchUser()
+  }, [])
+
 
 
 
@@ -114,7 +115,7 @@ export function CourseSidebar() {
     >
       <Sidebar className="h-full">
         <SidebarHeader className="p-4 space-y-4">
-          <motion.div 
+          <motion.div
             className="flex items-center gap-3"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -140,7 +141,7 @@ export function CourseSidebar() {
             </AnimatePresence>
           </motion.div>
           <Separator />
-          <motion.div 
+          <motion.div
             className="p-3 flex items-center gap-3 text-sm rounded-lg bg-blue-100"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -195,7 +196,7 @@ export function CourseSidebar() {
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter className="p-4 space-y-4">
-          <motion.div 
+          <motion.div
             className="bg-muted rounded-lg p-3"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -224,7 +225,7 @@ export function CourseSidebar() {
               </AnimatePresence>
             )}
           </motion.div>
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
