@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -18,6 +18,7 @@ const NavItem = ({ href, children }) => (
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLogin, setIslogin] = useState(false);
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev);
@@ -28,6 +29,13 @@ export default function NavBar() {
     localStorage.clear()
   }
 
+  useEffect(() => {
+   if (localStorage.getItem('token')) {
+    setIslogin(true)
+   }
+  }, [])
+  
+
   return (
     <header className="relative px-20 py-3 z-10">
       <div className="flex justify-between items-center p-4 mx-auto">
@@ -35,7 +43,7 @@ export default function NavBar() {
         <nav className="hidden md:flex space-x-8 lg:space-x-16">
 
         </nav>
-        {localStorage.getItem('token') ? <>
+        {isLogin ? <>
 
           <div className="hidden md:flex gap-5 space-x-2">
             <Button className="p-5 rounded-xl" variant="outline" asChild>
