@@ -25,7 +25,7 @@ import { Settings, AreaChartIcon as ChartArea, Building2, ClipboardList, ListChe
 
 const companyNav = [
   { name: "Courses", icon: ClipboardList, link: "/courses"},
-  { name: "Resume Generator", icon: ListChecks, link: "courses/resume",  },
+  { name: "Resume Generator", icon: ListChecks, link: "/courses/resume",  },
   { name: "Mentoring", icon: Video, link: "/mentor" },
   { name: "Discussion", icon: MessageSquareText, link: "/discussion" },
   { name: "AI Tutor", icon: BotMessageSquare, link: "/aitutor" },

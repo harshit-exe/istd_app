@@ -103,81 +103,81 @@ const ResumeBuilder = ({data}) => {
     }))
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+   const handleSubmit = async (e) => {
+  //   e.preventDefault()
 
-    const response = await fetch(`${BaseApiUrl}/resume`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ userid: data.userId, data: resume })
-    });
-    const json = await response.json();
-    console.log(data.userId,resume);
+  //   const response = await fetch(`${BaseApiUrl}/resume`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({ userid: data?.userId, data: resume })
+  //   });
+  //   const json = await response.json();
+  //   console.log(data.userId,resume);
     
-    if (json) {
-      console.log( "working",json);
+  //   if (json) {
+  //     console.log( "working",json);
       
     
-      router.push(`/resume/${data.userId}`)
+  //     router.push(`/resume/${data.userId}`)
     }
     
-  }
+  // }
 
 
 
-  const fetchUser = async () => {
-    const response = await fetch(`${BaseApiUrl}/resume`, {
-      method: 'GET',
-      headers: {
-        'userid':data.userId
-      }
-    });
+   const fetchUser = async () => {
+  //   const response = await fetch(`${BaseApiUrl}/resume`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'userid':data.userId
+  //     }
+    };
 
   
 
-    const json = await response.json();
-    if (json) {
-      if(json.resume.length !== 0){
-        console.log(json.resume[0].data[0]);
-        let newdata = json.resume[0].data[0]
+    // const json = await response.json();
+    // if (json) {
+    //   if(json.resume.length !== 0){
+    //     console.log(json.resume[0].data[0]);
+    //     let newdata = json.resume[0].data[0]
   
-        setResume({
-          personalInfo: {
-            name: newdata.personalInfo.name,
-            email: newdata.personalInfo.email,
-            phone: newdata.personalInfo.phone,
-            location: newdata.personalInfo.location,
-          },
-          summary: newdata.summary,
-          experience: newdata.experience,
-          // experience: [{ company: '', position: '', duration: '', description: '' }],
-          education: newdata.education,
-          skills: newdata.skills,
-        })
-      }
+    //     setResume({
+    //       personalInfo: {
+    //         name: newdata.personalInfo.name,
+    //         email: newdata.personalInfo.email,
+    //         phone: newdata.personalInfo.phone,
+    //         location: newdata.personalInfo.location,
+    //       },
+    //       summary: newdata.summary,
+    //       experience: newdata.experience,
+    //       // experience: [{ company: '', position: '', duration: '', description: '' }],
+    //       education: newdata.education,
+    //       skills: newdata.skills,
+    //     })
+    //   }
      
     
  
 
       // dispatch(setUser(json.user));
-    }
-  }
+  //   }
+  // }
 
 
-  useEffect(() => {
-    fetchUser()
-  }, [])
+  // useEffect(() => {
+  //   fetchUser()
+  // }, [])
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-lg shadow p-6 max-w-4xl mx-auto"
+      className="bg-white rounded-lg shadow p-6 w-full "
     >
-      <div>
-        <Link target='_blank' href={`/resume/${data.userId}`}><Button type="button" >
+      <div >
+        <Link target='_blank' href={`/resume/`}><Button type="button" >
             View Resume
           </Button></Link>
       </div>
