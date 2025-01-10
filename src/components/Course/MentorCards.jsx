@@ -6,25 +6,26 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Video, CuboidIcon as Cube } from 'lucide-react'
 import Image from "next/image"
+import { BaseApiUrl } from '@/utils/constanst'
 
 
 const mentors = [
   {
-    id:1,
+    id: 1,
     name: "Aman Gupta",
     photo: "https://media.licdn.com/dms/image/v2/D4D03AQE6U8fSOxLvjg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1687175656830?e=1741824000&v=beta&t=oyUDaGIWm9sdLPJ2dzFcvceQ_HubGBWEaK3KA2dZP9A",
     expertise: ["Frontend Development", "UI/UX Design"],
     description: "Expert in creating intuitive and responsive user interfaces with 10+ years of experience.",
   },
   {
-    id:2,
+    id: 2,
     name: "Ritesh Mane",
     photo: "https://media.licdn.com/dms/image/v2/D4E03AQEQrPN9VftV1A/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1690427043181?e=1741824000&v=beta&t=uBxmvCrL85xXbvGgSi1HReMfQ3tZlbSppVseYN5l-v8",
     expertise: ["Backend Development", "Database Design"],
     description: "Specializes in scalable backend architectures and efficient database systems.",
   },
   {
-    id:3,
+    id: 3,
     name: "Prajjval Jaiswal",
     photo: "https://media.licdn.com/dms/image/v2/D4E03AQFs1_1RGordAA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1723619753528?e=1741824000&v=beta&t=zr06OqW8HTMegBHzNcFRB5sKhr2sxgxVjei9FcbhKaw",
     expertise: ["Full Stack Development", "DevOps"],
@@ -34,12 +35,21 @@ const mentors = [
 
 export default function MentorCards() {
   const [selectedMentor, setSelectedMentor] = useState(null)
-  
-  const joinMeeting = (roomID) => {
+
+  const joinMeeting = async (roomID) => {
+
     const url = `/meeting/${roomID}`
+    const response = await fetch(`${BaseApiUrl}/whatsapp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ phone: '9922041218', text:`Hi harshit here meeting link.${url}` }),
+    });
+    const json = await response.json();
+
     window.open(url, '_blank')
   }
-  console
 
   const handleVideoCall = (mentorName) => {
     setSelectedMentor(mentorName)
@@ -94,9 +104,10 @@ export default function MentorCards() {
             <CardFooter className="flex justify-between gap-4">
               <Button
                 className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
-                onClick={() =>{ 
+                onClick={() => {
                   joinMeeting(mentor.id)
-                  handleVideoCall(mentor.name)}}
+                  // handleVideoCall(mentor.name)
+                }}
               >
                 <Video className="w-4 h-4 mr-2" />
                 Join Video Call
