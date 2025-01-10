@@ -6,6 +6,7 @@ import WhyChooseUs from '@/components/Home/WhyChooseUs'
 import Img1 from "../assets/banner1.png";
 import Img2 from "../assets/banner2.png";
 import Banner from '@/components/Home/Banner'
+import SubjectCard from '@/components/Home/SubjectCard'
 
 
 const BannerData = {
@@ -37,6 +38,7 @@ const page = () => {
         <WhyChooseUs />
         <Banner {...BannerData} />
         <Banner {...BannerData2} reverse={true} />
+        <SubjectCard/>
       </div>
       <Footer />
     </div>
