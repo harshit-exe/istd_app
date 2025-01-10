@@ -1,10 +1,11 @@
-import ARVR from '@/components/Course/ARVR'
+
+import MentorCards from '@/components/Course/MentorCards'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-        <ARVR/>
+       <MentorCards/>
     </div>
   )
 }
