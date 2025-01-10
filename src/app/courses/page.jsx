@@ -1,22 +1,12 @@
-import { CourseSidebar } from "@/components/Course/CourseSidebar";
-import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
+import CourseSection from '@/components/Course/CourseSection'
+import React from 'react'
 
-export default function RootLayout({ children }) {
+const page = () => {
   return (
-    <SidebarProvider>
-      <div className="flex h-screen overflow-hidden">
-        <CourseSidebar />
-        <SidebarInset className="flex-1 flex flex-col">
-          <header className="flex h-16 items-center gap-4 border-b px-6 bg-background">
-            <SidebarTrigger />
-            <h1 className="text-xl font-semibold">CodePathshala</h1>
-          </header>
-          <main className="flex-1 overflow-auto p-6">
-            {children}
-          </main>
-        </SidebarInset>
-      </div>
-    </SidebarProvider>
+    <div>
+        <CourseSection/>
+    </div>
   )
 }
 
+export default page

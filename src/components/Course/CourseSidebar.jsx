@@ -19,13 +19,14 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarTrigger,
+  useSidebar,
 } from '@/components/ui/sidebar'
 import { Settings, AreaChartIcon as ChartArea, Building2, ClipboardList, ListChecks, LogOut, User, X, Focus, MessageSquareText, Video, Gamepad2, BotMessageSquare, Briefcase } from 'lucide-react'
 
 const companyNav = [
   { name: "Dashboard", icon: ChartArea, link: "/dashboard" },
   { name: "Courses", icon: ClipboardList, link: "/courses" },
-  { name: "Assignments", icon: ListChecks, link: "/assignments" },
+  { name: "Assignments", icon: ListChecks, link: "/assignments", badge: 3 },
   { name: "Live Classes", icon: Video, link: "/live-classes" },
   { name: "Discussion", icon: MessageSquareText, link: "/discussion" },
   { name: "AI Tutor", icon: BotMessageSquare, link: "/ai-tutor" },
@@ -37,112 +38,153 @@ export function CourseSidebar() {
   const [status, setStatus] = React.useState(true)
   const [activeItem, setActiveItem] = React.useState('Dashboard')
   const router = useRouter()
+  const { state } = useSidebar()
 
   const handleLogout = () => {
     router.push('/login')
     localStorage.clear()
   }
 
+  const sidebarVariants = {
+    expanded: { width: 240 },
+    collapsed: { width: 0 },
+  }
+
   return (
-    <Sidebar className="w-[280px] border-r">
-      <SidebarHeader className="p-4 space-y-4">
-        <motion.div 
-          className="flex items-center gap-3"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-        >
-          <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>CP</AvatarFallback>
-          </Avatar>
-          <div>
-            <h2 className="text-lg font-semibold">
-              <span className="text-blue-700">CodePathshala</span>
-            </h2>
-            <p className="text-sm text-muted-foreground">for Learner</p>
-          </div>
-        </motion.div>
-        <Separator />
-        <motion.div 
-          className="p-3 flex items-center gap-3 text-sm rounded-lg bg-blue-100"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-        >
-          <Building2 size={18} />
-          <h2 className="font-medium">Harshit Nikam</h2>
-        </motion.div>
-      </SidebarHeader>
-      <SidebarContent className="px-4">
-        <SidebarMenu>
-          <AnimatePresence>
-            {companyNav.map((item) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
-              >
-                <SidebarMenuItem>
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <SidebarMenuButton
-                          asChild
-                          className={`w-full justify-start ${activeItem === item.name ? 'bg-primary/10 text-primary' : ''}`}
-                          onClick={() => setActiveItem(item.name)}
-                        >
-                          <Link href={item.link} className="flex items-center">
-                            <item.icon className="mr-2 h-4 w-4" />
-                            {item.name}
-                            {item.name === 'Assignments' && (
-                              <Badge variant="destructive" className="ml-auto">3</Badge>
-                            )}
-                          </Link>
-                        </SidebarMenuButton>
-                      </TooltipTrigger>
-                      <TooltipContent side="right">
-                        <p>{item.name}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </SidebarMenuItem>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </SidebarMenu>
-      </SidebarContent>
-      <SidebarFooter className="p-4 space-y-4">
-        <motion.div 
-          className="flex items-center justify-between bg-muted rounded-lg p-2"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-        >
-          <User className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm">Status:</span>
-          <Switch
-            checked={status}
-            onCheckedChange={setStatus}
-            className="data-[state=checked]:bg-primary"
-          />
-          <span className="text-sm font-medium">
-            {status ? 'Online' : 'Offline'}
-          </span>
-        </motion.div>
-        <motion.div 
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-        >
-          <Button
-            variant="ghost"
-            className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
-            onClick={handleLogout}
+    <motion.div
+      variants={sidebarVariants}
+      animate={state}
+      transition={{ duration: 0.3 }}
+      className="z-40 h-screen bg-background border-r overflow-hidden"
+    >
+      <Sidebar className="h-full">
+        <SidebarHeader className="p-4 space-y-4">
+          <motion.div 
+            className="flex items-center gap-3"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <LogOut className="mr-2 h-4 w-4" />
-            Logout
-          </Button>
-        </motion.div>
-      </SidebarFooter>
-    </Sidebar>
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarFallback>CP</AvatarFallback>
+            </Avatar>
+            <AnimatePresence>
+              {state === 'expanded' && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <h2 className="text-lg font-semibold">
+                    <span className="text-blue-700">CodePathshala</span>
+                  </h2>
+                  <p className="text-sm text-muted-foreground">for Learner</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+          <Separator />
+          <motion.div 
+            className="p-3 flex items-center gap-3 text-sm rounded-lg bg-blue-100"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <Building2 size={18} />
+            <AnimatePresence>
+              {state === 'expanded' && (
+                <motion.h2
+                  className="font-medium"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Harshit Nikam
+                </motion.h2>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        </SidebarHeader>
+        <SidebarContent className="px-3">
+          <SidebarMenu>
+            {companyNav.map((item) => (
+              <SidebarMenuItem key={item.name}>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <SidebarMenuButton
+                        asChild
+                        className={`w-full justify-start ${activeItem === item.name ? 'bg-primary/10 text-primary' : ''}`}
+                        onClick={() => setActiveItem(item.name)}
+                      >
+                        <Link href={item.link} className="flex items-center py-2">
+                          <item.icon className="h-4 w-4 mr-3" />
+                          {state === 'expanded' && (
+                            <span className="text-sm font-medium">{item.name}</span>
+                          )}
+                          {item.badge && state === 'expanded' && (
+                            <Badge variant="destructive" className="ml-auto text-xs">{item.badge}</Badge>
+                          )}
+                        </Link>
+                      </SidebarMenuButton>
+                    </TooltipTrigger>
+                    <TooltipContent side="right">
+                      <p>{item.name}</p>
+                      {item.badge && <Badge variant="destructive" className="ml-2">{item.badge}</Badge>}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarContent>
+        <SidebarFooter className="p-4 space-y-4">
+          <motion.div 
+            className="bg-muted rounded-lg p-3"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <div className="flex items-center justify-between">
+              <User className="h-4 w-4 text-muted-foreground" />
+              <Switch
+                checked={status}
+                onCheckedChange={setStatus}
+                className="data-[state=checked]:bg-primary"
+              />
+            </div>
+            {state === 'expanded' && (
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="mt-2"
+                >
+                  <span className="text-sm font-medium">
+                    {status ? 'Online' : 'Offline'}
+                  </span>
+                </motion.div>
+              </AnimatePresence>
+            )}
+          </motion.div>
+          <motion.div 
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
+              onClick={handleLogout}
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              {state === 'expanded' && <span className="text-sm font-medium">Logout</span>}
+            </Button>
+          </motion.div>
+        </SidebarFooter>
+      </Sidebar>
+    </motion.div>
   )
 }
+
