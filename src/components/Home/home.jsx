@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import { FaPlay, FaTimes } from "react-icons/fa";
@@ -6,6 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SlideRight } from "@/../utils/animation";
 import { useRouter } from "next/navigation";
 
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
+import { Users, Zap } from 'lucide-react'
 
 const Home = () => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -14,7 +17,7 @@ const Home = () => {
   const closeVideo = () => setIsVideoOpen(false);
   const router = useRouter();
   const handleNavigateCourses = () => router.push("/courses");
- 
+
   return (
     <>
       <div className="container grid grid-cols-1 md:grid-cols-2 min-h-[650px] relative">
@@ -34,28 +37,51 @@ const Home = () => {
               initial="hidden"
               animate="visible"
             >
-             Dont just learn—turn your new skills into a rewarding career. Our platform bridges the gap between education and employment, making it easy to find both learning resources and job opportunities in one place. Success is just a click away! 
-            </motion.p>
+             Discover a world of knowledge with our curated online courses. Learn from industry experts and advance your career at your own pace.
+              </motion.p>
             {/* button section */}
-            <motion.div
+         <motion.div
               variants={SlideRight(1.0)}
               initial="hidden"
               animate="visible"
               className="flex gap-8 justify-center md:justify-start !mt-8 items-center"
             >
-              <button className="primary-btn" onClick={handleNavigateCourses}>Go To Course</button>
-              {/* <button 
-                onClick={openVideo}
-                className="flex justify-end items-center gap-2 font-semibold"
-              >
-                <span className="w-10 h-10 bg-[#0063ff]/15 rounded-full flex justify-center items-center">
-                  <FaPlay className="text-[#0063ff]" />
-                </span>
-                See how it works
-              </button> */}
-            </motion.div>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-12 mt-12">
+            <div className="flex items-center gap-3">
+              <div className="flex flex-col items-center">
+                <div className="flex self-start gap-3">
+                <Users className="h-10 w-10 text-blue-500 mt-0" />
+                <div className="text-4xl mb-3 font-bold">8.5k+</div>
+                </div>
+                <div className="text-md text-gray-600 max-w-[300px] text-start">
+                Active learners enrolled in our courses
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <svg className="w-16 h-16 text-gray-200 transform " fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+              </svg>
+              <svg className="w-16 h-16 text-gray-200 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="flex flex-col items-center">
+                <div className="flex self-start gap-3">
+                <Zap className="h-10 w-10 text-green-500 mt-0" />
+                <div className="text-4xl mb-3 font-bold">40+</div>
+                </div>
+                <div className="text-md text-gray-600 max-w-[300px] text-start">
+                Expert-led courses across various disciplines
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+              {/* <button className="primary-btn" onClick={handleNavigateCourses}>Go To Course</button> */}
+            </motion.div>
+          </div> 
+         </div>
         {/* Hero image */}
         <div className="flex justify-center items-center">
           <motion.img
@@ -66,7 +92,7 @@ const Home = () => {
             alt=""
             className="w-[350px] h-auto md:w-[550px] xl:w-[700px]"
           />
-        </div>
+        </div> 
       </div>
 
       {/* Video Popup */}
@@ -115,5 +141,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
