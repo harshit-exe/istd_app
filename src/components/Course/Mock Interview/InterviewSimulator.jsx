@@ -1,13 +1,12 @@
-'use client';
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+"use client"
+import React, { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { InterviewScene } from './InterviewScene';
-import { useVoiceInteraction } from '@/hooks/useVoiceInteraction';
-import { useAudioRecorder } from '@/hooks/useAudioRecorder';
+import { BehaviorGraph } from './BehaviorGraph';
 import { useGroqAI } from '@/hooks/useGroqAI';
-import { analyzeAudio } from '@/utils/audioAnalysis';
+import { useVoiceInput } from '@/hooks/useVoiceInput';
+import { useTextToSpeech } from '@/hooks/useTextToSpeech';
 
 const interviewTypes = [
   { value: 'react', label: 'React' },
@@ -21,78 +20,99 @@ export function InterviewSimulator() {
   const [userAnswer, setUserAnswer] = useState('');
   const [feedback, setFeedback] = useState('');
   const [isInterviewStarted, setIsInterviewStarted] = useState(false);
+  const [isAnswering, setIsAnswering] = useState(false);
+  const [behaviorData, setBehaviorData] = useState([]);
+  const [error, setError] = useState(null);
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
-  const { generateInterviewQuestions, isLoading, error: aiError } = useGroqAI();
-  const { startListening, stopListening, transcript, resetTranscript } = useVoiceInteraction();
-  const { startRecording, stopRecording, audioBlob, isRecording } = useAudioRecorder();
-
-  const [questions, setQuestions] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const { generateQuestion, evaluateAnswer, isLoading, error: aiError } = useGroqAI();
+  const { startListening, stopListening, transcript, error: voiceError } = useVoiceInput();
+  const { speak, stop: stopSpeaking } = useTextToSpeech();
 
   const startInterview = useCallback(async () => {
     if (!interviewType) return;
-    const { questions, error } = await generateInterviewQuestions(interviewType);
-    if (error) {
-      setFeedback(`Error: ${error}`);
-      return;
-    }
-    setQuestions(questions);
-    setCurrentQuestionIndex(0);
     setIsInterviewStarted(true);
-  }, [interviewType, generateInterviewQuestions]);
-
-  const askQuestion = useCallback(() => {
-    if (currentQuestionIndex < questions.length) {
-      setCurrentQuestion(questions[currentQuestionIndex]);
-      // Use text-to-speech to ask the question
-      const utterance = new SpeechSynthesisUtterance(questions[currentQuestionIndex]);
-      speechSynthesis.speak(utterance);
-      startListening();
-      startRecording();
-    } else {
+    setError(null);
+    try {
+      const question = await generateQuestion(interviewType);
+      setCurrentQuestion(question);
+      speakWithTracking(question);
+    } catch (err) {
+      setError('Failed to start the interview. Please try again.');
       setIsInterviewStarted(false);
-      setFeedback('Interview completed. Thank you for your participation!');
     }
-  }, [currentQuestionIndex, questions, startListening, startRecording]);
+  }, [interviewType, generateQuestion]);
 
-  const submitAnswer = useCallback(async () => {
+  const startAnswering = useCallback(() => {
+    setIsAnswering(true);
+    setError(null);
+    startListening();
+  }, [startListening]);
+
+  const stopAnswering = useCallback(async () => {
+    setIsAnswering(false);
     stopListening();
-    stopRecording();
     setUserAnswer(transcript);
-    resetTranscript();
-
-    if (audioBlob) {
-      const analysis = await analyzeAudio(audioBlob);
-      setFeedback(analysis);
+    try {
+      const evaluation = await evaluateAnswer(currentQuestion, transcript);
+      setFeedback(evaluation);
+      speakWithTracking(evaluation);
+    } catch (err) {
+      setError('Failed to evaluate the answer. Please try again.');
     }
+  }, [stopListening, transcript, currentQuestion, evaluateAnswer]);
 
-    setCurrentQuestionIndex((prev) => prev + 1);
-  }, [stopListening, stopRecording, transcript, resetTranscript, audioBlob]);
-
-  useEffect(() => {
-    if (isInterviewStarted && questions.length > 0) {
-      askQuestion();
+  const nextQuestion = useCallback(async () => {
+    setError(null);
+    try {
+      const question = await generateQuestion(interviewType);
+      setCurrentQuestion(question);
+      speakWithTracking(question);
+      setUserAnswer('');
+      setFeedback('');
+    } catch (err) {
+      setError('Failed to generate the next question. Please try again.');
     }
-  }, [isInterviewStarted, questions, askQuestion]);
+  }, [interviewType, generateQuestion]);
+
+  const speakWithTracking = (text) => {
+    setIsSpeaking(true);
+    speak(text);
+  };
+
+  const handleStopSpeaking = () => {
+    stopSpeaking();
+    setIsSpeaking(false);
+  };
+
+  const handleDataUpdate = useCallback((newData) => {
+    setBehaviorData(prevData => [
+      ...prevData,
+      {
+        timestamp: new Date().toISOString(),
+        ...newData,
+        ...newData.expressions
+      }
+    ]);
+  }, []);
+
+  React.useEffect(() => {
+    if (aiError) setError(aiError);
+    if (voiceError) setError(voiceError);
+  }, [aiError, voiceError]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white p-8">
-      <motion.h1
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-4xl font-bold mb-8"
-      >
-        AI-Powered Interview Simulator
-      </motion.h1>
+      <h1 className="text-4xl font-bold mb-8">AI-Powered Interview Simulator</h1>
+
+      {error && (
+        <div className="bg-red-600 text-white p-4 rounded-lg mb-4">
+          <p>{error}</p>
+        </div>
+      )}
 
       {!isInterviewStarted ? (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col items-center gap-4"
-        >
+        <div className="flex flex-col items-center gap-4">
           <Select onValueChange={setInterviewType}>
             <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="Select interview type" />
@@ -108,37 +128,51 @@ export function InterviewSimulator() {
           <Button onClick={startInterview} disabled={!interviewType || isLoading}>
             {isLoading ? 'Loading...' : 'Start Interview'}
           </Button>
-          {aiError && <p className="text-red-500">{aiError}</p>}
-        </motion.div>
+        </div>
       ) : (
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-4xl"
-        >
-          <div className="mb-8 h-[400px] rounded-lg overflow-hidden">
-            <InterviewScene />
+        <div className="w-full max-w-4xl">
+          <div className="mb-8 flex flex-col md:flex-row gap-4">
+            <div className="w-full md:w-1/2 h-[300px] rounded-lg overflow-hidden bg-gray-100 relative">
+              <InterviewScene onDataUpdate={handleDataUpdate} />
+            </div>
+            <div className="w-full md:w-1/2 h-[300px] bg-gray-800 rounded-lg p-4">
+              <BehaviorGraph data={behaviorData} />
+            </div>
           </div>
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold mb-4">Current Question:</h2>
             <p className="text-xl mb-6">{currentQuestion}</p>
             <div className="mb-6">
               <h3 className="text-lg font-semibold mb-2">Your Answer:</h3>
-              <p className="italic">{transcript}</p>
+              <p className="italic">{isAnswering ? transcript : userAnswer}</p>
             </div>
-            <Button onClick={submitAnswer} className="mb-4" disabled={!isRecording}>
-              {isRecording ? 'Stop Recording & Submit' : 'Submit Answer'}
-            </Button>
+            {!isAnswering ? (
+              <Button onClick={startAnswering} className="mb-4">
+                Start Answering
+              </Button>
+            ) : (
+              <Button onClick={stopAnswering} className="mb-4">
+                Stop Answering
+              </Button>
+            )}
             {feedback && (
-              <div className="bg-gray-700 p-4 rounded-lg">
+              <div className="bg-gray-700 p-4 rounded-lg mb-4">
                 <h3 className="text-lg font-semibold mb-2">Feedback:</h3>
                 <p>{feedback}</p>
+                {isSpeaking && (
+                  <Button onClick={handleStopSpeaking} className="mt-2">
+                    Stop Speaking
+                  </Button>
+                )}
               </div>
             )}
+            <Button onClick={nextQuestion} className="mt-4">
+              Next Question
+            </Button>
           </div>
-        </motion.div>
+        </div>
       )}
     </div>
   );
 }
+

@@ -1,7 +1,10 @@
+'use client';
+
 import { useState, useCallback, useEffect } from 'react'
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
+import { useSpeechRecognition } from 'react-speech-recognition'
 
 export function useVoiceInteraction() {
+  const [isListening, setIsListening] = useState(false)
   const {
     transcript,
     listening,
@@ -9,20 +12,27 @@ export function useVoiceInteraction() {
     browserSupportsSpeechRecognition
   } = useSpeechRecognition()
 
-  const [isListening, setIsListening] = useState(false)
-
   const startListening = useCallback(() => {
     setIsListening(true)
-    SpeechRecognition.startListening({ continuous: true })
+    if (typeof window !== 'undefined' && window.SpeechRecognition) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.start();
+    }
   }, [])
 
   const stopListening = useCallback(() => {
     setIsListening(false)
-    SpeechRecognition.stopListening()
+    if (typeof window !== 'undefined' && window.SpeechRecognition) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.stop();
+    }
   }, [])
 
   useEffect(() => {
-    if (!browserSupportsSpeechRecognition) {
+    if (typeof window !== 'undefined' && !browserSupportsSpeechRecognition) {
       console.error("Browser doesn't support speech recognition.")
     }
   }, [browserSupportsSpeechRecognition])
