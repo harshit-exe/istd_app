@@ -9,7 +9,8 @@ import { BaseApiUrl } from "@/utils/constanst";
 export default function page() {
   const router = useRouter();
 
-  const clientId = "768974449019-c0slgah7in7rhlr13cs295t9esodjb3b.apps.googleusercontent.com";
+  const clientId = "768974449019-60pn6e18b4grspfbhr7bs388k5g97sm2.apps.googleusercontent.com";
+  // 768974449019-60pn6e18b4grspfbhr7bs388k5g97sm2.apps.googleusercontent.com
 
   const onSignupSuccess = async (res) => {
     console.log(res.email);

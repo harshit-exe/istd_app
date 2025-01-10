@@ -14,6 +14,7 @@ import {
 
 
 const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
+  
   const router = useRouter();
   const handleNavigateRoadmap = () => router.push("/courses/roadmap");
   return (
