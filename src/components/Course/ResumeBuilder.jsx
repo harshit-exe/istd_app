@@ -223,7 +223,7 @@ const ResumeBuilder = () => {
       console.log("data send working", json);
 
 
-      router.push(`/courses/resume/${data.userId}`)
+      router.push(`/dashboard/resume/${data.userId}`)
     }
 
   }
@@ -276,7 +276,7 @@ const ResumeBuilder = () => {
       className="bg-white rounded-lg shadow p-6 w-full "
     >
       <div >
-        <Link target='_blank' href={`/courses/resume/${data.userId}`}><Button type="button" >
+        <Link target='_blank' href={`/dashboard/resume/${data.userId}`}><Button type="button" >
           View Resume
         </Button></Link>
       </div>
