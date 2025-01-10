@@ -26,13 +26,13 @@ import { Settings, AreaChartIcon as ChartArea, Building2, ClipboardList, ListChe
 const companyNav = [
   { name: "Courses", icon: ClipboardList, link: "/dashboard/courses"},
   { name: "Resume Generator", icon: ListChecks, link: "/courses/resume",  },
-  { name: "Mentoring", icon: Video, link: "/dashboard/mentor" },
-  { name: "Discussion", icon: MessageSquareText, link: "/dashboard/discussion" },
-  { name: "AI Tutor", icon: BotMessageSquare, link: "/dashboard/aitutor" },
-  { name: "AI Mock Test", icon: BotMessageSquare, link: "/dashboard/mocktest" },
-  { name: "Roadmap", icon: Briefcase, link: "/dashboard/roadmap" },
-  { name: "Mock Interview", icon: Settings, link: "/dashboard/mockinterview" },
-  { name: "Settings", icon: Settings, link: "/dashboard/settings" },
+  { name: "Mentoring", icon: Video, link: "/courses/mentor" },
+  { name: "AI Mock Test", icon: BotMessageSquare, link: "/courses/mocktest" },
+  { name: "Mock Interview", icon: Settings, link: "/courses/mockinterview" },
+  { name: "Roadmap", icon: Briefcase, link: "/courses/roadmap" },
+  { name: "Discussion", icon: MessageSquareText, link: "/discussion" },
+  { name: "AI Tutor", icon: BotMessageSquare, link: "/aitutor" },
+  { name: "Settings", icon: Settings, link: "/settings" },
 ];
 
 export function CourseSidebar() {
