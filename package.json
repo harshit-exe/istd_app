@@ -32,8 +32,8 @@
     "react-icon": "^1.0.0",
     "react-icons": "^5.4.0",
     "react-speech-recognition": "^3.10.0",
-    "sonner": "^1.7.1",
     "react-vr-icons": "^0.0.1",
+    "sonner": "^1.7.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },

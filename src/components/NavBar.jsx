@@ -6,7 +6,7 @@ import Link from "next/link";
 const NavItem = ({ href, children }) => (
   <Link
     href={href}
-    className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center"
+    className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center hover:underline hover:text-purple-500"
   >
     {children}
     <ChevronDown className="ml-1 h-4 w-4" />
@@ -15,9 +15,9 @@ const NavItem = ({ href, children }) => (
 
 const Button = ({ variant = "solid", children, className = "" }) => (
   <button
-    className={`px-4 py-2 rounded font-semibold transition-colors duration-200 ${
+    className={`px-4 py-2 rounded-3xl font-semibold transition-colors duration-200 ${
       variant === "outline"
-        ? "border border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white"
+        ? "border-none text-bold text-purple-500 hover:bg-purple-500 hover:text-white"
         : "bg-purple-500 text-white hover:bg-purple-600"
     } ${className}`}
   >
