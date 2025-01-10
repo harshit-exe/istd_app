@@ -36,7 +36,7 @@ export default function page() {
 
     if (json) {
       localStorage.setItem("token", json.authToken);
-      router.push("/");
+      router.push("/dashboard");
     }
   };
 
