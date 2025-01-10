@@ -75,12 +75,27 @@ Campus++ Team`
     window.open('https://framevr.io/mentor', '_blank')
     var url ='https://framevr.io/mentor'
 
+
+
+    
+    var message = `Hello, Harshit here!
+
+🌐 Metaverse Session:
+Step into the Metaverse for an engaging mentoring experience.
+
+📌 Join Now:
+Click the link below to enter the session:
+${url}
+
+🔖 Brought to you by:
+Campus++ Team`
+
     const response = await fetch(`${BaseApiUrl}/whatsapp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ phone: '9922041218', text:`Hi harshit here Metaverse link ${url}` }),
+      body: JSON.stringify({ phone: '9922041218', text:`Hi harshit here Metaverse link ${message}` }),
     });
     const json = await response.json();
   }
