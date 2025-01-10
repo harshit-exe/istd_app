@@ -4,7 +4,7 @@ import { Facebook, Twitter, Instagram, LinkedinIcon as LinkedIn, GitlabIcon as G
 
 
 
-export function Footer() {
+export default function Footer() {
   return (
     <footer className="relative py-10 overflow-hidden">
       <div
