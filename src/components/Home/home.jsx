@@ -30,7 +30,7 @@ const Home = () => {
               animate="visible"
               className="text-5xl font-semibold lg:text-5xl !leading-tight"
             >
-              Bridging the Gap between <span className="text-purple-600">Learning and Earning!</span> 
+              Unlock Your Potential with <span className="text-blue-600">Cutting-Edge Learning Tools and Resources!</span> 
             </motion.h1>
             <motion.p
               variants={SlideRight(0.8)}
@@ -88,7 +88,7 @@ const Home = () => {
             initial={{ opacity: 0, x: 200 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
-            src="/assets/hero.png"
+            src="/assets/front.jpg"
             alt=""
             className="w-[350px] h-auto md:w-[550px] xl:w-[700px]"
           />
@@ -113,10 +113,10 @@ const Home = () => {
               onClick={(e) => e.stopPropagation()}
               className="relative w-full max-w-4xl aspect-video bg-white rounded-lg overflow-hidden shadow-2xl"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-blue-600 opacity-20"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-600 opacity-20"></div>
               <button
                 onClick={closeVideo}
-                className="absolute top-4 right-4 text-white hover:text-purple-600 transition-colors duration-300 z-10"
+                className="absolute top-4 right-4 text-white hover:text-blue-600 transition-colors duration-300 z-10"
                 aria-label="Close video"
               >
                 <FaTimes size={24} />

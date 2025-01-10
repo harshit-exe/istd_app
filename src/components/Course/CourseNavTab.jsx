@@ -15,7 +15,7 @@ export default function CourseNavTab({
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className={`bg-purple-600 text-white px-6 py-2 rounded-full ${
+        className={`bg-blue-600 text-white px-6 py-2 rounded-full ${
           currentLessonIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
         }`}
         onClick={onPrevious}
@@ -26,7 +26,7 @@ export default function CourseNavTab({
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className={`bg-purple-600 text-white px-6 py-2 rounded-full ${
+        className={`bg-blue-600 text-white px-6 py-2 rounded-full ${
           currentLessonIndex === totalLessons - 1
             ? "opacity-50 cursor-not-allowed"
             : ""

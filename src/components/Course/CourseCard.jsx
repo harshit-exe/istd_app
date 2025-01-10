@@ -85,14 +85,14 @@ export default function CourseCard({
           ))}
         </div>
         <Link href={`/courses/${id}`}>
-  <button className="w-full bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300">
+  <button className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300">
     Start Now
   </button>
 </Link>
 
       </div>
       <motion.div
-        className="absolute bottom-0 left-0 right-0 h-1 bg-purple-600"
+        className="absolute bottom-0 left-0 right-0 h-1 bg-blue-600"
         initial={{ width: 0 }}
         animate={{ width: `${progress}%` }}
         transition={{ duration: 3 }}

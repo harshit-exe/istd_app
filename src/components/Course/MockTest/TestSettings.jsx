@@ -17,7 +17,7 @@ export default function TestSettings({ questionCount, setQuestionCount, timeLimi
             id="testName"
             value={testName}
             onChange={(e) => setTestName(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-base"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base"
             placeholder="Enter test name"
           />
         </motion.div>
@@ -35,7 +35,7 @@ export default function TestSettings({ questionCount, setQuestionCount, timeLimi
             onChange={(e) => setQuestionCount(Number(e.target.value))}
             min="1"
             max="50"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
           />
         </motion.div>
         <motion.div
@@ -52,7 +52,7 @@ export default function TestSettings({ questionCount, setQuestionCount, timeLimi
             onChange={(e) => setTimeLimit(Number(e.target.value))}
             min="1"
             max="120"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
           />
         </motion.div>
       </div>

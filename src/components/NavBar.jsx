@@ -6,7 +6,7 @@ import Link from "next/link";
 const NavItem = ({ href, children }) => (
   <Link
     href={href}
-    className="text-gray-600 transition-colors duration-200 flex items-center hover:underline hover:text-purple-500"
+    className={"text-gray-600 transition-colors duration-200 flex items-center hover:underline hover:text-blue-500 "}
   >
     {children}
     <ChevronDown className="ml-1 h-4 w-4" />
@@ -17,8 +17,8 @@ const Button = ({ variant = "solid", children, className = "" }) => (
   <button
     className={`px-4 py-2 rounded-3xl font-semibold transition-colors duration-200 ${
       variant === "outline"
-        ? "border-none text-bold text-purple-500 hover:bg-purple-500 hover:text-white"
-        : "bg-purple-500 text-white hover:bg-purple-600"
+        ? "border-none text-bold text-blue-500 hover:bg-blue-500 hover:text-white"
+        : "bg-blue-500 text-white hover:bg-blue-600"
     } ${className}`}
   >
     {children}
@@ -35,7 +35,7 @@ export default function NavBar() {
   return (
     <header className="relative z-10 bg-slate-50">
       <div className="flex justify-between items-center p-4 max-w-7xl mx-auto">
-        <div className="text-2xl font-bold text-purple-800">CodePathshala</div>
+        <div className="text-2xl font-bold text-blue-800">CodePathshala</div>
         <nav className="hidden md:flex space-x-8 lg:space-x-16">
           <NavItem href="/">Home</NavItem>
           <NavItem href="/courses">Course</NavItem>
@@ -63,7 +63,7 @@ export default function NavBar() {
           className="absolute top-full left-0 right-0 bg-white shadow-md p-4 md:hidden"
         >
           <nav className="flex flex-col space-y-4">
-            <NavItem href="/">Home</NavItem>
+            <NavItem href="/" >Home</NavItem>
             <NavItem href="/courses">Course</NavItem>
             <NavItem href="/dashboard">Dashboard</NavItem>
             <a

@@ -3,6 +3,15 @@ import React from "react";
 import { motion } from "framer-motion";
 import { SlideUp } from "@/../utils/animation";
 import { useRouter } from "next/navigation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
 
 const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
   const router = useRouter();
@@ -27,40 +36,50 @@ const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
             />
           </div>
           {/* Banner text section */}
+          <Card>
           <div className="flex flex-col justify-center text-center md:text-left space-y-4 lg:max-w-[500px]">
+            <CardHeader>
             <motion.p
               variants={SlideUp(0.5)}
-              initial="hidden"
+              initial="visible"
               whileInView={"visible"}
-              className="text-sm text-purple-600 font-semibold capitalize"
+              className="text-sm text-blue-600 font-semibold capitalize"
             >
               {tag}
             </motion.p>
+            <CardTitle>
             <motion.p
               variants={SlideUp(0.7)}
-              initial="hidden"
+              initial="visible"
               whileInView={"visible"}
               className="text-xl lg:text-2xl font-semibold capitalize "
             >
               {title}
             </motion.p>
+            </CardTitle>
+            </CardHeader>
+            <CardContent>
             <motion.p
               variants={SlideUp(0.9)}
-              initial="hidden"
+              initial="visible"
               whileInView={"visible"}
               className="text-sm text-slate-500"
             >
               {subtitle}
             </motion.p>
+            </CardContent>
+            <CardContent>
             <motion.div
               variants={SlideUp(1.1)}
-              initial="hidden"
+              initial="visible"
               whileInView={"visible"}
               className="flex justify-center md:justify-start"
             >
-              <button className="primary-btn !mt-5" onClick={handleNavigateRoadmap}>Get Started</button>
+               <button className="primary-btn !mt-5" onClick={handleNavigateRoadmap}>Get Started</button>
             </motion.div>
+            </CardContent>
           </div>
+          </Card>
         </div>
       </div>
     </div>

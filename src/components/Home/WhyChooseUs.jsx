@@ -51,7 +51,7 @@ const WhyChooseUs = () => {
       <div className="container py-24">
         {/* header section */}
         <div className="space-y-4 p-6 text-center max-w-[500px] mx-auto mb-5">
-          <h1 className="uppercase font-semibold text-purple-800">
+          <h1 className="uppercase font-semibold text-blue-800">
             Why Choose Us
           </h1>
           <p className="font-semibold text-3xl">
@@ -76,7 +76,7 @@ const WhyChooseUs = () => {
                 >
                   <div className="text-2xl">{item.icon}</div>
                 </div>
-                <p className="font-semibold">{item.title}</p>
+                <p className="font-semibold text-blue-400">{item.title}</p>
                 <p className="text-sm text-gray-500">{item.desc}</p>
               </motion.div>
             );

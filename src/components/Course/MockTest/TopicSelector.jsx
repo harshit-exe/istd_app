@@ -21,7 +21,7 @@ export default function TopicSelector({ selectedTopics, setSelectedTopics }) {
             onClick={() => toggleTopic(topic)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
               selectedTopics.includes(topic)
-                ? 'bg-purple-600 text-white'
+                ? 'bg-blue-600 text-white'
                 : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
             }`}
             whileHover={{ scale: 1.05 }}
