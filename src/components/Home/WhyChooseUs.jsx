@@ -5,6 +5,7 @@ import { FaVideo } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 import { RiRoadMapFill } from "react-icons/ri";
 import { motion } from "framer-motion";
+import { Glasses } from "lucide-react";
 import { SlideLeft } from "@/../utils/animation";
 
 const WhyChooseData = [
@@ -30,7 +31,7 @@ const WhyChooseData = [
     title: "VR Mock Interviews ",
     desc: "Welcome to our comprehensive job portal designed to connect talented individuals with diverse career opportunities across all professions.",
     link: "/",
-    icon: <MdWork/>,
+    icon: <Glasses/>,
     bgColor: "#fa6400",
     delay: 0.9,
   },
