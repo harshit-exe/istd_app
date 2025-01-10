@@ -46,6 +46,7 @@
     "react-vr-icons": "^0.0.1",
     "reactflow": "^11.11.4",
     "recharts": "^2.15.0",
+    "sharp": "^0.33.5",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
