@@ -19,12 +19,11 @@ export default function RootLayout({ children }) {
       <div className="flex h-screen w-screen overflow-hidden">
         <CourseSidebar />
         <SidebarInset className="flex flex-col">
-          <header className="flex h-16 items-center justify-between gap-4 border-b px-6 bg-background">
+          <header className="flex h-16 items-center justify-between gap-4  p-4 bg-background">
             <div className="flex items-center gap-4">
               <SidebarTrigger />
               <h1 className="text-xl font-semibold">Campus++ Dashboard</h1>
             </div>
-
             <Button
               variant="default"
               className="bg-blue-600 hover:bg-blue-700"
