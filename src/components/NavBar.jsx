@@ -35,11 +35,11 @@ export default function NavBar() {
   return (
     <header className="relative z-10">
       <div className="flex justify-between items-center p-4 max-w-7xl mx-auto">
-        <div className="text-2xl font-bold text-purple-800">CodePathshala</div>
+        <div className="text-2xl font-bold text-purple-800">LEARNfromHOME</div>
         <nav className="hidden md:flex space-x-8 lg:space-x-16">
           <NavItem href="/">Home</NavItem>
           <NavItem href="/courses">Course</NavItem>
-          <NavItem href="/jobs">Job</NavItem>
+          {/* <NavItem href="/jobs">Job</NavItem> */}
           <NavItem href="/dashboard">Dashboard</NavItem>
         </nav>
         <div className="hidden md:flex space-x-2">

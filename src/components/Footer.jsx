@@ -25,13 +25,12 @@ const linkPaths = {
   "Webinars": "#webinars",
   "Feedback": "/feedback",
   "Courses": "/courses",
-  "Job": "/job",
   "Resume Builder": "/dashboard",
   "Roadmap": "/courses/roadmap",
 };
   
   return (
-    <footer className="bg-gradient-to-br from-pink-400 to-purple-600 text-white pt-20 pb-8 relative">
+    <footer className="bg-gradient-to-br from-purple-700 to-pink-400 text-white pt-20 pb-8 relative">
       <div className="absolute top-0 left-0 right-0 h-16 bg-white rounded-b-[100%]" />
       <div className="container mx-auto px-4 relative">
         <motion.div
@@ -42,7 +41,7 @@ const linkPaths = {
         >
           <h2 className="text-2xl font-bold text-center mb-2">Get In Touch!</h2>
           <p className="text-center text-sm mb-4">
-            Subscribe to get in touch and to enjoy discounts, promos and much
+            Subscribe to our page and enjoy discounts, promos and much
             more!
           </p>
           <form
@@ -129,7 +128,7 @@ const linkPaths = {
             },
             {
               title: "Links",
-              links: ["Courses", "Job", "Resume Builder", "Roadmap"],
+              links: ["Courses", "Resume Builder", "Roadmap"],
             },
           ].map((column, index) => (
             <div key={column.title}>
