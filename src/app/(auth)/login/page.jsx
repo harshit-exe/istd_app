@@ -17,7 +17,7 @@ import LoginForm from "@/components/Home/LoginForm";
 export default function page() {
   const router = useRouter();
 
-  const clientId = "768974449019-m4g65pch56jd1khq099hhkndj8cotiq3.apps.googleusercontent.com";
+  const clientId = "976004726633-qd21qspr0t0hep43vup331of8aq1u8je.apps.googleusercontent.com";
   // 768974449019-60pn6e18b4grspfbhr7bs388k5g97sm2.apps.googleusercontent.com
 
 
