@@ -42,7 +42,7 @@ export function CourseSidebar() {
   const { state } = useSidebar()
 
   const handleLogout = () => {
-    router.push('/login')
+    router.push('/')
     localStorage.clear()
   }
 
