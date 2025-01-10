@@ -6,7 +6,7 @@ import Link from "next/link";
 const NavItem = ({ href, children }) => (
   <Link
     href={href}
-    className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center hover:underline hover:text-purple-500"
+    className="text-gray-600 transition-colors duration-200 flex items-center hover:underline hover:text-purple-500"
   >
     {children}
     <ChevronDown className="ml-1 h-4 w-4" />
@@ -42,8 +42,10 @@ export default function NavBar() {
           <NavItem href="/dashboard">Dashboard</NavItem>
         </nav>
         <div className="hidden md:flex space-x-2">
-          <Button variant="outline">Sign In</Button>
-          <Button>Free Trial</Button>
+          <Button variant="outline">
+          <Link href={"/auth"}>Sign in</Link>
+          </Button>
+          
         </div>
         <button
           className="md:hidden p-2"
@@ -73,9 +75,8 @@ export default function NavBar() {
           </nav>
           <div className="mt-4 space-y-2">
             <Button variant="outline" className="w-full">
-              Sign In
+              <Link href={"/auth"}>Sign in</Link>
             </Button>
-            <Button className="w-full">Free Trial</Button>
           </div>
         </div>
       )}
