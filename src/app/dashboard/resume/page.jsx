@@ -1,12 +1,13 @@
 'use client'
 import ResumeBuilder from '@/components/Course/ResumeBuilder'
 import { BaseApiUrl } from '@/utils/constanst'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 const page = () => {
 
 
-  
+    const router = useRouter();
   const [data, setData] = useState([])
   const fetchUser = async () => {
     const response = await fetch(`${BaseApiUrl}/user/`, {
