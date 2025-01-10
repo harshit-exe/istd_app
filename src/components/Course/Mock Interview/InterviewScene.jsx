@@ -1,40 +1,74 @@
-import React, { useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF, OrbitControls, Environment } from '@react-three/drei'
-import { useSpring, animated } from '@react-spring/three'
+import React, { useRef, useEffect, useState } from 'react'
+import { useFaceTracking } from '@/hooks/useFaceTracking'
+import { Button } from '@/components/ui/button'
 
-function Model({ url }) {
-  const { scene } = useGLTF(url)
-  const modelRef = useRef(null)
+export function InterviewScene({ onFaceDataUpdate }) {
+  const videoRef = useRef(null)
+  const { startTracking, stopTracking, detectFace, faceData, error, useFallback } = useFaceTracking()
+  const [retryCount, setRetryCount] = useState(0)
 
-  const { rotation } = useSpring({
-    from: { rotation: [0, 0, 0] },
-    to: async (next) => {
-      while (true) {
-        await next({ rotation: [0, Math.PI * 2, 0], config: { duration: 10000 } })
+  useEffect(() => {
+    let interval
+    const initializeTracking = async () => {
+      if (videoRef.current) {
+        try {
+          await startTracking(videoRef.current)
+          interval = setInterval(() => detectFace(videoRef.current), useFallback ? 2000 : 100)
+        } catch (err) {
+          console.error('Failed to initialize tracking:', err)
+        }
       }
-    },
-  })
-
-  useFrame(() => {
-    if (modelRef.current) {
-      modelRef.current.rotation.y += 0.005
     }
-  })
 
-  return <animated.primitive object={scene} ref={modelRef} rotation={rotation} />
-}
+    initializeTracking()
 
-export function InterviewScene() {
+    return () => {
+      if (interval) clearInterval(interval)
+      stopTracking()
+    }
+  }, [startTracking, stopTracking, detectFace, retryCount, useFallback])
+
+  useEffect(() => {
+    if (faceData) {
+      onFaceDataUpdate(faceData)
+    }
+  }, [faceData, onFaceDataUpdate])
+
+  useEffect(() => {
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream
+        }
+      })
+      .catch(err => console.error("Error accessing the camera", err))
+  }, [])
+
+  const handleRetry = () => {
+    setRetryCount(prev => prev + 1)
+  }
+
   return (
-    <Canvas camera={{ position: [0, 0, 5] }}>
-      <ambientLight intensity={0.5} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-      <pointLight position={[-10, -10, -10]} />
-      <Model url="/models/interviewer.glb" />
-      <OrbitControls />
-      <Environment preset="city" />
-    </Canvas>
+    <div className="relative w-full h-full">
+      <video
+        ref={videoRef}
+        className="w-full h-full object-cover"
+        autoPlay
+        playsInline
+        muted
+      />
+      {/* {error && (
+        <div className="absolute top-0 left-0 w-full bg-red-500 text-white p-2">
+          {/* <p>{error}</p>
+          {!useFallback && <Button onClick={handleRetry} className="mt-2">Retry</Button>} */}
+        {/* </div>
+      )}
+      {useFallback && (
+        <div className="absolute bottom-0 left-0 w-full bg-yellow-500 text-white p-2">
+          <p>Using fallback data</p>
+        </div>
+      )} */} 
+    </div>
   )
 }
 

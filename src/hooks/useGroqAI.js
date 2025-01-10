@@ -3,12 +3,11 @@ import { useState } from 'react';
 const GROQ_API_KEY = "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"; // Replace this with your actual Groq API key
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
-
 export function useGroqAI() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const generateInterviewQuestions = async (interviewType) => {
+  const callGroqAPI = async (messages) => {
     setIsLoading(true);
     setError(null);
 
@@ -21,51 +20,43 @@ export function useGroqAI() {
         },
         body: JSON.stringify({
           model: 'mixtral-8x7b-32768',
-          messages: [
-            { role: 'system', content: 'You are an AI assistant that generates interview questions for software developers.' },
-            { role: 'user', content: `Generate 5 interview questions for a ${interviewType} developer position. Provide the questions as a JSON array of strings.` }
-          ],
-          max_tokens: 500,
+          messages: messages,
+          max_tokens: 150,
           temperature: 0.7,
         }),
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to generate questions: ${response.status} ${response.statusText}`);
+        throw new Error(`Failed to call Groq API: ${response.status} ${response.statusText}`);
       }
 
       const data = await response.json();
-      const content = data.choices[0].message.content;
-
-      let questionsJson;
-      try {
-        questionsJson = JSON.parse(content);
-      } catch (parseError) {
-        console.error('Error parsing Groq AI response:', parseError);
-        
-        // Attempt to extract a JSON array from the response
-        const jsonArrayMatch = content.match(/\[[\s\S]*\]/);
-        if (jsonArrayMatch) {
-          questionsJson = JSON.parse(jsonArrayMatch[0]);
-        } else {
-          throw new Error('Failed to extract questions from Groq AI response');
-        }
-      }
-
-      if (!Array.isArray(questionsJson)) {
-        throw new Error('Groq AI response is not an array of questions');
-      }
-
-      return { questions: questionsJson, error: null };
+      return data.choices[0].message.content.trim();
     } catch (error) {
-      console.error('Error generating questions with Groq AI:', error);
-      setError(error instanceof Error ? error.message : 'An unknown error occurred');
-      return { questions: [], error: error instanceof Error ? error.message : 'An unknown error occurred' };
+      console.error('Error calling Groq API:', error);
+      setError(error.message);
+      return 'Failed to process request. Please try again.';
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { generateInterviewQuestions, isLoading, error };
+  const generateQuestion = async (interviewType) => {
+    const messages = [
+      { role: 'system', content: 'You are an AI assistant that generates concise interview questions for software developers.' },
+      { role: 'user', content: `Generate a short 4-5 line, challenging interview question for a ${interviewType} developer position. Keep it under 20 words.` }
+    ];
+    return callGroqAPI(messages);
+  };
+
+  const evaluateAnswer = async (question, answer) => {
+    const messages = [
+      { role: 'system', content: 'You are an AI assistant that evaluates interview answers.' },
+      { role: 'user', content: `Question: ${question}\nAnswer: ${answer}\n\nEvaluate the answer and provide short, constructive feedback in 2-3 sentences.` }
+    ];
+    return callGroqAPI(messages);
+  };
+
+  return { generateQuestion, evaluateAnswer, isLoading, error };
 }
 
