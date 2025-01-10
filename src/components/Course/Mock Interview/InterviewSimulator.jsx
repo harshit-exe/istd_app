@@ -153,7 +153,7 @@ export function InterviewSimulator() {
               </Button>
             )}
             {feedback && (
-              <div className="bg-gray-700 p-4 rounded-lg mb-4">
+              <div className=" p-4 rounded-lg mb-4">
                 <h3 className="text-lg font-semibold mb-2">Feedback:</h3>
                 <p>{feedback}</p>
                 {isSpeaking && (
