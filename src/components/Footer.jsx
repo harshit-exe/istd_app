@@ -151,7 +151,7 @@ const linkPaths = {
           <div>
             <h4 className="font-semibold mb-4">Contact Us</h4>
             <p>+91 9922041218</p>
-            <p>codepathshala@gmail.com</p>
+            <p>CodePathshala@gmail.com</p>
           </div>
         </div>
 
