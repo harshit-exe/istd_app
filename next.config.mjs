@@ -2,15 +2,10 @@
 const nextConfig = {
   images: {
     domains: ['www.linkedin.com', 'media.licdn.com'],
-
   },
   webpack: (config) => {
-    config.module.rules.push({
-      test: /\.js$/,
-      type: 'javascript/auto', // Allows CommonJS imports
-    });
     return config;
   },
 };
 
-export default nextConfig;
+export default nextConfig; // Correct ESM syntax
