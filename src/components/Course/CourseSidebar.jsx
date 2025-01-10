@@ -73,6 +73,7 @@ export function CourseSidebar() {
     const json = await response.json();
     if (json) {
       console.log(json);
+      setData(json.user.user)
      
 
       // dispatch(setUser(json.user));
@@ -103,7 +104,7 @@ export function CourseSidebar() {
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarImage src={data?.pic} alt="@shadcn" />
               <AvatarFallback>CP</AvatarFallback>
             </Avatar>
             <AnimatePresence>
@@ -117,7 +118,7 @@ export function CourseSidebar() {
                   <h2 className="text-lg font-semibold">
                     <span className="text-blue-700">CodePathshala</span>
                   </h2>
-                  <p className="text-sm text-muted-foreground">for {data?.userName}</p>
+                  <p className="text-sm text-muted-foreground">for {data?.username}</p>
                 </motion.div>
               )}
             </AnimatePresence>
