@@ -24,7 +24,7 @@ import {
 import { Settings, AreaChartIcon as ChartArea, Building2, ClipboardList, ListChecks, LogOut, User, X, Focus, MessageSquareText, Video, Gamepad2, BotMessageSquare, Briefcase } from 'lucide-react'
 
 const companyNav = [
-  { name: "Courses", icon: ClipboardList, link: "/courses"},
+  { name: "Courses", icon: ClipboardList, link: "/dashboard/courses"},
   { name: "Resume Generator", icon: ListChecks, link: "/courses/resume",  },
   { name: "Mentoring", icon: Video, link: "/courses/mentor" },
   { name: "AI Mock Test", icon: BotMessageSquare, link: "/courses/mocktest" },

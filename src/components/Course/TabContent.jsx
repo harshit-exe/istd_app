@@ -48,7 +48,7 @@ export default function TabContent({ activeTab, lesson }) {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-purple-600 text-white px-3 py-1 rounded-md text-sm"
+              className="bg-blue-600 text-white px-3 py-1 rounded-md text-sm"
               onClick={handleQuestionSubmit}
             >
               Submit Question
@@ -78,7 +78,7 @@ export default function TabContent({ activeTab, lesson }) {
             {lesson.downloadFile ? (
               <a
                 href={lesson.downloadFile}
-                className="bg-purple-600 text-white px-4 py-2 rounded-md text-sm"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm"
                 download
               >
                 Download Lesson Files

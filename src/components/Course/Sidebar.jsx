@@ -12,7 +12,7 @@ export default function Sidebar({ lessons, currentLessonIndex, setCurrentLessonI
       transition={{ type: "spring", stiffness: 100 }}
       className="w-full lg:w-80 bg-white shadow-lg h-full lg:h-screen mt-6"
     >
-      <div className="p-6 rounded-sm bg-purple-600 text-white">
+      <div className="p-6 rounded-sm bg-blue-600 text-white">
         <h2 className="text-2xl font-bold">{title}</h2>
         <p className="mt-2 text-sm">{description}</p>
       </div>
@@ -28,12 +28,12 @@ export default function Sidebar({ lessons, currentLessonIndex, setCurrentLessonI
               <button
                 className={`w-full p-3 text-left rounded-lg transition-colors duration-200 ease-in-out flex items-center ${
                   currentLessonIndex === index
-                    ? "bg-purple-100 text-purple-700"
+                    ? "bg-blue-100 text-blue-700"
                     : "hover:bg-gray-100 text-gray-700"
                 }`}
                 onClick={() => setCurrentLessonIndex(index)}
               >
-                <span className="mr-3 text-purple-600">{index + 1}</span>
+                <span className="mr-3 text-blue-600">{index + 1}</span>
                 <span className="text-sm">{lesson.title}</span>
               </button>
             </motion.li>

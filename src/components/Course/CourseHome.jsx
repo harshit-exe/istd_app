@@ -93,7 +93,7 @@ export default function CourseHome() {
                   whileHover={{ scale: 1.05 }}
                   className={`flex-1 px-4 py-2 text-sm font-medium transition-colors duration:200 ease-in-out ${
                     activeTab === tab
-                      ? "bg-purple-100 text-purple-700"
+                      ? "bg-blue-100 text-blue-700"
                       : "text-gray-600 hover:bg-gray-100"
                   }`}
                   onClick={() => setActiveTab(tab)}

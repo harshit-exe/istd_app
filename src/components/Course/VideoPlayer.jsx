@@ -37,7 +37,7 @@ export default function VideoPlayer({ lesson, videoUrl }) {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={handlePlay}
-              className="bg-white text-purple-600 rounded-full p-4 shadow-lg"
+              className="bg-white text-blue-600 rounded-full p-4 shadow-lg"
               aria-label="Play Video"
             >
               {/* Play button icon */}

@@ -1,10 +1,10 @@
-import Footer from '@/components/Footer'
+import {Footer} from '@/components/Footer'
 import NavBar from '@/components/NavBar'
 import React from 'react'
 import Home from '@/components/Home/home'
 import WhyChooseUs from '@/components/Home/WhyChooseUs'
-import Img1 from "../assets/banner1.png";
-import Img2 from "../assets/banner2.png";
+import Img1 from "../../public/assets/study.jpg";
+import Img2 from "../../public/assets/VR.jpg";
 import Banner from '@/components/Home/Banner'
 import SubjectCard from '@/components/Home/SubjectCard'
 import FAQ from '@/components/Home/FAQ'
@@ -12,11 +12,11 @@ import FAQ from '@/components/Home/FAQ'
 
 const BannerData = {
   image: Img1,
-  tag: "Learn at Your Own Pace",
+  tag: "Comprehensive Course Library",
   title:
-    "Embrace the Freedom to Learn at Your Own Pace: Tailor Your Educational Journey to Fit Your Unique Schedule and Goals! ",
+    "Embrace the Freedom to Learn at Your Own Pace: Unlock a World of Learning Opportunities! ",
   subtitle:
-    "Experience the freedom and flexibility to learn at your own pace, allowing you to tailor your educational journey to fit your unique schedule, learning preferences, and personal goals. With our self-paced courses, you can take the time to thoroughly grasp complex concepts, revisit materials as needed, and progress through the curriculum without the pressure of strict deadlines.",
+    "At CodePatshala, we offer a vast and diverse range of courses designed to meet the needs of learners at all stages. Whether you’re looking to build foundational knowledge or enhance specialized skills, our library covers everything you need to succeed.",
   link: "#",
 };
 
@@ -39,7 +39,6 @@ const page = () => {
         <WhyChooseUs />
         <Banner {...BannerData} />
         <Banner {...BannerData2} reverse={true} />
-        <SubjectCard/>
         <FAQ/>
       </div>
       <Footer />

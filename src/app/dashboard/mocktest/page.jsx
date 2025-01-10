@@ -68,7 +68,7 @@ export default function Home() {
                 <motion.button
                   onClick={handleStartQuiz}
                   disabled={isLoading || selectedTopics.length === 0}
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-lg text-lg font-semibold shadow-lg disabled:opacity-50 transition duration-300 ease-in-out transform hover:scale-105"
+                  className="w-full bg-gradient-to-r from-blue-600 to-pink-600 text-white py-3 px-6 rounded-lg text-lg font-semibold shadow-lg disabled:opacity-50 transition duration-300 ease-in-out transform hover:scale-105"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

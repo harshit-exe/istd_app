@@ -28,7 +28,7 @@ export default function ResultComponent({ results, testName, topics }) {
     <div className="bg-white shadow-2xl rounded-2xl p-6 max-w-3xl mx-auto">
       <h2 className="text-3xl font-bold mb-6 text-gray-800">{testName} Results</h2>
       <div className="text-2xl mb-3">
-        Your Score: <span className="font-semibold text-purple-600">{score}%</span> ({correctAnswers} out of {totalQuestions} correct)
+        Your Score: <span className="font-semibold text-blue-600">{score}%</span> ({correctAnswers} out of {totalQuestions} correct)
       </div>
       <div className="text-lg mb-6 text-gray-600">
         Hints Used: {hintsUsed} out of {totalQuestions}
@@ -64,7 +64,7 @@ export default function ResultComponent({ results, testName, topics }) {
       <div className="flex justify-center space-x-4 mt-6">
         <motion.button
           onClick={handlePrint}
-          className="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 text-base font-medium flex items-center"
+          className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 text-base font-medium flex items-center"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
