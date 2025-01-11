@@ -28,7 +28,7 @@ const companyNav = [
   { name: "Resume Generator", icon: ListChecks, link: "/courses/resume",  },
   { name: "Mentoring", icon: Video, link: "/dashboard/mentor" },
   { name: "Discussion", icon: MessageSquareText, link: "/dashboard/discussion" },
-  { name: "AI Tutor", icon: BotMessageSquare, link: "/dashboard/aitutor" },
+  { name: "Active Events", icon: BotMessageSquare, link: "/dashboard/events" },
   { name: "AI Mock Test", icon: BotMessageSquare, link: "/dashboard/mocktest" },
   { name: "Roadmap", icon: Briefcase, link: "/dashboard/roadmap" },
   { name: "Mock Interview", icon: Settings, link: "/dashboard/mockinterview" },

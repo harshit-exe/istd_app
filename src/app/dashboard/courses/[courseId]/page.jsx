@@ -4,7 +4,7 @@ import NavBar from "@/components/NavBar";
 
 // Adjust the path if needed
 
-export default function CoursePage() {
+export default function CoursePage({coureId}) {
   return (
     <div>
         <div className="">
