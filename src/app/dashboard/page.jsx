@@ -102,7 +102,9 @@ export default function Dashboard() {
             <div className="space-y-4">
               <p className="text-blue-600">Next Session: Introduction to GraphQL</p>
               <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                Join VR Classroom
+                
+                <Link target="_blank" href={`https://framevr.io/classroommmm`}> Join VR Classroom</Link>
+
               </Button>
             </div>
           </CardContent>
