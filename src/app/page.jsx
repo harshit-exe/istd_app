@@ -5,6 +5,7 @@ import WhyChooseUs from "@/components/Home/WhyChooseUs";
 import { Button } from "@/components/ui/button";
 import { PlayCircle } from "lucide-react";
 import Image from "next/image";
+import { Input } from "@/components/ui/input";
 
 const Benefits = [
   {
@@ -61,10 +62,46 @@ const page = () => {
             <Button className="p-6 text-base">Start Exploring</Button>
           </div>
           <div className="py-10 flex gap-5">
-            <div className="h-[300px] rounded-lg bg-blue-200 border w-[300px]"></div>
-            <div className="h-[300px] rounded-lg bg-blue-200 border w-[300px]"></div>
-            <div className="h-[300px] rounded-lg bg-blue-200 border w-[300px]"></div>
-            <div className="h-[300px] rounded-lg bg-blue-200 border w-[300px]"></div>
+            <div className="h-[300px] relative rounded-lg bg-blue-500 border w-[300px]">
+              <Image
+                src={"/student2.jpg"}
+                alt="collegestudent"
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center"
+                className="rounded-xl shadow-sm"
+              />
+            </div>
+            <div className="h-[300px] relative rounded-lg bg-blue-500 border w-[300px]">
+              <Image
+                src={"/student1.jpg"}
+                alt="collegestudent"
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center"
+                className="rounded-xl shadow-sm"
+              />
+            </div>
+            <div className="h-[300px] relative rounded-lg bg-blue-500 border w-[300px]">
+              <Image
+                src={"/student3.jpg"}
+                alt="collegestudent"
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center"
+                className="rounded-xl shadow-sm"
+              />
+            </div>
+            <div className="h-[300px] relative rounded-lg bg-blue-500 border w-[300px]">
+              <Image
+                src={"/student4.jpg"}
+                alt="collegestudent"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-xl shadow-sm"
+                objectPosition="center"
+              />
+            </div>
           </div>
         </section>
 
@@ -90,7 +127,9 @@ const page = () => {
 
         <section className="my-20 flex items-center gap-16 px-20">
           <div className="flex-1">
-            <p className="font-medium p-2 rounded-full text-sm px-5 mb-5 bg-slate-200 w-fit">Affordable Education to Tier 3 student</p>
+            <p className="font-medium p-2 rounded-full text-sm px-5 mb-5 bg-slate-200 w-fit">
+              Affordable Education to Tier 3 student
+            </p>
             <h3 className="text-4xl mb-10 font-medium">
               A Groundbreaking Initiative to Empower Education Across India
             </h3>
@@ -104,9 +143,59 @@ const page = () => {
             </p>
           </div>
           <div className="flex-1 flex gap-5">
-            <div className="h-[500px] w-[400px] rounded-xl bg-blue-200"></div>
-            <div className="h-[500px] w-[400px] rounded-xl bg-blue-200"></div>
+            <div className="h-[500px] w-[400px] relative rounded-xl bg-blue-200">
+              <Image
+                src={"/campus1.jpg"}
+                alt="campus student"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-xl shadow-sm"
+                objectPosition="center"
+              />
+            </div>
+            <div className="h-[500px] w-[400px] relative rounded-xl bg-blue-200">
+              <Image
+                src={"/campus2.jpg"}
+                alt="campus student"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-xl shadow-sm"
+                objectPosition="center"
+              />
+            </div>
           </div>
+        </section>
+        <section></section>
+        <section className="mx-20 p-20 bg-slate-50 rounded-2xl mb-10">
+          <div className="flex justify-between">
+            <div>
+              <h1 className="text-2xl text-blue-600 font-semibold">Campus++</h1>
+              <p className="mt-5">Padega India Tabhi To badega India!!</p>
+              <p>campusPlus@gmai.com</p>
+            </div>
+            <div>
+              <h1 className="text-xl font-medium mb-3">Quick Links</h1>
+              <div>
+                <p>Home</p>
+                <p>Course</p>
+                <p>Ai Labs</p>
+                <p>Resume Builder</p>
+                <p>Roadmap generator</p>
+              </div>
+            </div>
+            <div className="border p-8 rounded-xl border-black">
+              <h1 className="text-xl font-medium">Subscibe Our New Letter</h1>
+              <p className="w-[40ch] my-2 text-sm">
+                Get job opportunities and intership offers directly on your
+                email, start india to explore education from anywhere india
+              </p>
+              <div className="flex gap-5">
+                <Input />
+                <Button>Submit</Button>
+              </div>
+            </div>
+          </div>
+          <div></div>
         </section>
       </div>
     </>
