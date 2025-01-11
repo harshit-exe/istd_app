@@ -34,15 +34,7 @@ export default function Home() {
   
     return (
       <div className="min-h-screen  py-8 px-4 sm:px-6 ">
-        <div className="max-w-3xl mx-auto">
-          <motion.h1 
-            className="text-4xl font-extrabold text-center mb-8 text-black"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            AI Mock Test Generator
-          </motion.h1>
+        <div className="">
           <AnimatePresence mode="wait">
             {!quizStarted && !quizFinished && (
               <motion.div
@@ -51,7 +43,7 @@ export default function Home() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white rounded-xl shadow-2xl p-6"
+                className="bg-white rounded-xl p-6"
               >
                 <TopicSelector
                   selectedTopics={selectedTopics}
@@ -68,8 +60,7 @@ export default function Home() {
                 <motion.button
                   onClick={handleStartQuiz}
                   disabled={isLoading || selectedTopics.length === 0}
-                  className="w-full bg-gradient-to-r from-blue-600 to-pink-600 text-white py-3 px-6 rounded-lg text-lg font-semibold shadow-lg disabled:opacity-50 transition duration-300 ease-in-out transform hover:scale-105"
-                  whileHover={{ scale: 1.05 }}
+                  className="w-full  text-white bg-blue-500 py-3 px-6 rounded-lg text-lg font-semibold shadow-lg  transition duration-300 ease-in-out transform hover:scale-105"
                   whileTap={{ scale: 0.95 }}
                 >
                   {isLoading ? 'Generating Questions...' : 'Start Quiz'}
