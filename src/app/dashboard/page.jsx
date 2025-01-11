@@ -238,7 +238,7 @@ export default function Dashboard() {
         ))
 
         }
-        <Card className="col-span-full bg-white shadow-lg">
+        {/* <Card className="col-span-full bg-white shadow-lg">
           <CardHeader className="border-b border-blue-100">
             <div className="flex items-center justify-between">
               <CardTitle className="text-blue-800">Mock Test Results</CardTitle>
@@ -286,7 +286,7 @@ export default function Dashboard() {
               <Badge className="bg-blue-100 text-blue-600">Node.js</Badge>
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
 
       
       </div>
