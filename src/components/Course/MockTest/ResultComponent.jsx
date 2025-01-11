@@ -1,3 +1,4 @@
+import { BaseApiUrl } from '@/utils/constanst'
 import { motion } from 'framer-motion'
 import { Printer, Share2, CheckCircle, XCircle, HelpCircle } from 'lucide-react'
 
@@ -11,7 +12,7 @@ export default function ResultComponent({ results, testName, topics }) {
     window.print()
   }
 
-  const handleShareWhatsApp = () => {
+  const handleShareWhatsApp = async () => {
     const resultJson = JSON.stringify({
       testName,
       date: new Date().toISOString(),
@@ -21,7 +22,37 @@ export default function ResultComponent({ results, testName, topics }) {
       hintsUsed,
       topics
     })
-    console.log('WhatsApp share data:', resultJson)
+
+    var message = `Test Report
+📝 Test Name: ${testName}
+📊 Total Questions: ${totalQuestions}
+✅ Correct Answers: ${correctAnswers}
+🎯 Score: ${score}%
+💡 Hints Used: ${hintsUsed}
+📚 Topics Covered: ${topics}`
+    // {"testName":"","date":"2025-01-11T02:41:23.858Z","totalQuestions":5,"correctAnswers":1,"score":20,"hintsUsed":0,"topics":["Node.js"]}
+
+    const response = await fetch(`${BaseApiUrl}/mocktest`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userid: '9922041218', testName: testName, totalQuestions: totalQuestions, correctAnswers: correctAnswers,
+        score: score, topics: topics
+      }),
+    });
+
+    const response2 = await fetch(`${BaseApiUrl}/whatsapp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ phone: '9922041218', text: `Hii Your Mocktest Result : ${message}` }),
+    });
+    const json = await response.json();
+    console.log( resultJson,json)
+
   }
 
   return (
@@ -35,8 +66,8 @@ export default function ResultComponent({ results, testName, topics }) {
       </div>
       <div className="space-y-6 mb-8">
         {results.map((result, index) => (
-          <motion.div 
-            key={index} 
+          <motion.div
+            key={index}
             className={`p-4 rounded-lg ${result.isCorrect ? 'bg-green-100' : 'bg-red-100'}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

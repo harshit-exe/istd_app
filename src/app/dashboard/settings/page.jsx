@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { User, Mail, Phone, Home } from 'lucide-react'
+import { BaseApiUrl } from '@/utils/constanst'
 
 export default function ProfileSettings() {
   const [name, setName] = useState('John Doe')
@@ -32,6 +33,31 @@ export default function ProfileSettings() {
     }
   }
 
+
+   const [data, setData] = useState([]);
+  
+    const fetchUser = async () => {
+      const response = await fetch(`${BaseApiUrl}/user/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+  
+      const json = await response.json();
+      if (json) {
+        console.log(json);
+        setData(json.user.user);
+  
+        // dispatch(setUser(json.user));
+      }
+    };
+  
+    useEffect(() => {
+      fetchUser();
+    }, []);
+
   return (
     <div className="px-10">
       <Card className="shadow-none">
@@ -43,7 +69,7 @@ export default function ProfileSettings() {
           <CardContent className="space-y-6">
             <div className="flex flex-col items-center space-y-4">
               <Avatar className="w-32 h-32">
-                <AvatarImage src={avatar} alt="Profile picture" />
+                <AvatarImage src={data?.pic} alt="Profile picture" />
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
               <Label htmlFor="avatar" className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2">
@@ -55,7 +81,7 @@ export default function ProfileSettings() {
               <Label htmlFor="name">Name</Label>
               <div className="relative">
                 <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input id="name" value={name} onChange={(e) => setName(e.target.value)} className="pl-10" />
+                <Input id="name" value={data?.username} onChange={(e) => setName(e.target.value)} className="pl-10" />
               </div>
             </div>
             <div className="space-y-2">
