@@ -59,7 +59,7 @@ export default function NavBar() {
               <Link href={"/login"}>Login</Link>
             </Button>
             <Button className="bg-indigo-500 rounded-xl border-none text-white  p-5" variant="outline" asChild>
-              <Link href={"/register"}>Get Started</Link>
+              <Link href={"/login"}>Get Started</Link>
             </Button>
           </div>
         </>}

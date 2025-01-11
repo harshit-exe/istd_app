@@ -30,8 +30,7 @@ export default function CourseCard({
   const router = useRouter()
 
   const goto=()=>{
-    router.push(`/courses/${id}`)
-    console.log("chutiya");
+    router.push(`courses/${id}`)
   }
   
 
