@@ -95,7 +95,7 @@ export function CourseSidebar() {
       // dispatch(setUser(json.user));
     }
   };
-
+  
   useEffect(() => {
     fetchUser();
   }, []);

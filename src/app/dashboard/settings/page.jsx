@@ -6,20 +6,60 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { User, Mail, Phone, Home } from 'lucide-react'
+import { User, Mail, Phone, Home, CheckCircle } from 'lucide-react'
 import { BaseApiUrl } from '@/utils/constanst'
 
 export default function ProfileSettings() {
-  const [name, setName] = useState('John Doe')
-  const [email, setEmail] = useState('john.doe@example.com')
-  const [phone, setPhone] = useState('+1 234 567 8900')
-  const [address, setAddress] = useState('123 Main St, Anytown, AN 12345')
-  const [avatar, setAvatar] = useState('/placeholder.svg?height=100&width=100')
+  const [userData, setUserData] = useState({
+    username: '',
+    email: '',
+    phone: '',
+    address: '',
+    pic: '/placeholder.svg?height=100&width=100'
+  })
+  const [isPhoneVerified, setIsPhoneVerified] = useState(false)
+
+  useEffect(() => {
+    fetchUser()
+  }, [])
+
+  const fetchUser = async () => {
+    try {
+      const response = await fetch(`${BaseApiUrl}/user/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+
+      const json = await response.json()
+      if (json && json.user && json.user.user) {
+        setUserData({
+          username: json.user.user.username || '',
+          email: json.user.user.email || '',
+          phone: json.user.user.phone || '',
+          address: json.user.user.address || '',
+          pic: json.user.user.pic || '/placeholder.svg?height=100&width=100'
+        })
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error)
+    }
+  }
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target
+    setUserData(prevData => ({
+      ...prevData,
+      [name]: value
+    }))
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault()
     // Here you would typically send the updated profile data to your backend
-    console.log('Profile updated:', { name, email, phone, address })
+    console.log('Profile updated:', userData)
   }
 
   const handleAvatarChange = (event) => {
@@ -27,87 +67,112 @@ export default function ProfileSettings() {
     if (file) {
       const reader = new FileReader()
       reader.onloadend = () => {
-        setAvatar(reader.result)
+        setUserData(prevData => ({
+          ...prevData,
+          pic: reader.result
+        }))
       }
       reader.readAsDataURL(file)
     }
   }
 
-
-   const [data, setData] = useState([]);
-  
-    const fetchUser = async () => {
-      const response = await fetch(`${BaseApiUrl}/user/`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-  
-      const json = await response.json();
-      if (json) {
-        console.log(json);
-        setData(json.user.user);
-  
-        // dispatch(setUser(json.user));
-      }
-    };
-  
-    useEffect(() => {
-      fetchUser();
-    }, []);
+  const handleVerifyPhone = () => {
+    // Implement phone verification logic here
+    console.log('Verifying phone number:', userData.phone)
+    // For demonstration, we'll just toggle the state
+    setIsPhoneVerified(!isPhoneVerified)
+  }
 
   return (
-    <div className="px-10">
-      <Card className="shadow-none">
-        <CardHeader>
-          <CardTitle>Profile Settings</CardTitle>
+    <div className="container mx-auto px-4 py-8">
+      <Card className="max-w-2xl mx-auto">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl font-bold">Profile Settings</CardTitle>
           <CardDescription>Update your personal information and account settings</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-6">
             <div className="flex flex-col items-center space-y-4">
               <Avatar className="w-32 h-32">
-                <AvatarImage src={data?.pic} alt="Profile picture" />
-                <AvatarFallback>JD</AvatarFallback>
+                <AvatarImage src={userData.pic} alt="Profile picture" />
+                <AvatarFallback>{userData.username.charAt(0)}</AvatarFallback>
               </Avatar>
-              <Label htmlFor="avatar" className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2">
+              <Label htmlFor="avatar" className="cursor-pointer bg-blue-500 text-white hover:bg-blue-600 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-10 px-4 py-2">
                 Change Avatar
               </Label>
               <Input id="avatar" type="file" accept="image/*" className="hidden" onChange={handleAvatarChange} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="username">Name</Label>
               <div className="relative">
-                <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input id="name" value={data?.username} onChange={(e) => setName(e.target.value)} className="pl-10" />
+                <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <Input 
+                  id="username" 
+                  name="username"
+                  value={userData.username} 
+                  onChange={handleInputChange} 
+                  className="pl-10" 
+                />
               </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="pl-10" />
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <Input 
+                  id="email" 
+                  name="email"
+                  type="email" 
+                  value={userData.email} 
+                  onChange={handleInputChange} 
+                  className="pl-10" 
+                />
               </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="phone">Phone</Label>
-              <div className="relative">
-                <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className="pl-10" />
+              <div className="relative flex">
+                <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <Input 
+                  id="phone" 
+                  name="phone"
+                  type="tel" 
+                  value='9922041837' 
+                  onChange={handleInputChange} 
+                  className="pl-10 flex-grow" 
+                />
+                <Button 
+                  type="button" 
+                  onClick={handleVerifyPhone} 
+                  className="ml-2 bg-green-500 hover:bg-green-600"
+                >
+                  {isPhoneVerified ? (
+                    <>
+                      <CheckCircle className="mr-2 h-4 w-4" />
+                      Verified
+                    </>
+                  ) : (
+                    'Verify'
+                  )}
+                </Button>
               </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="address">Address</Label>
               <div className="relative">
-                <Home className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input id="address" value={address} onChange={(e) => setAddress(e.target.value)} className="pl-10" />
+                <Home className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <Input 
+                  id="address" 
+                  name="address"
+                  value="Mumbai,India" 
+                  onChange={handleInputChange} 
+                  className="pl-10" 
+                />
               </div>
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="ml-auto">Save Changes</Button>
+            <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600">Save Changes</Button>
           </CardFooter>
         </form>
       </Card>
