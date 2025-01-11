@@ -1,6 +1,7 @@
 import { BaseApiUrl } from '@/utils/constanst'
 import { motion } from 'framer-motion'
 import { Printer, Share2, CheckCircle, XCircle, HelpCircle } from 'lucide-react'
+import { useEffect } from 'react'
 
 export default function ResultComponent({ results, testName, topics }) {
   const correctAnswers = results.filter((result) => result.isCorrect).length
@@ -12,6 +13,50 @@ export default function ResultComponent({ results, testName, topics }) {
     window.print()
   }
 
+
+
+
+  const sendData = async () => {
+
+
+    const resultJson = JSON.stringify({
+      testName,
+      date: new Date().toISOString(),
+      totalQuestions,
+      correctAnswers,
+      score,
+      hintsUsed,
+      topics
+    })
+
+
+    const response3 = await fetch(`${BaseApiUrl}/user/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    const json3 = await response3.json();
+    if (json3) {
+      console.log(json3.user.user.id);
+      // setData(json.user.user);
+
+      // dispatch(setUser(json.user));
+      const response = await fetch(`${BaseApiUrl}/mocktest`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userid: json3.user.user.id, testName: testName, totalQuestions: totalQuestions, correctAnswers: correctAnswers,
+          score: score, topics: topics
+        }),
+      });
+    }
+
+  }
   const handleShareWhatsApp = async () => {
     const resultJson = JSON.stringify({
       testName,
@@ -32,28 +77,52 @@ export default function ResultComponent({ results, testName, topics }) {
 📚 Topics Covered: ${topics}`
     // {"testName":"","date":"2025-01-11T02:41:23.858Z","totalQuestions":5,"correctAnswers":1,"score":20,"hintsUsed":0,"topics":["Node.js"]}
 
-    const response = await fetch(`${BaseApiUrl}/mocktest`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userid: '9922041218', testName: testName, totalQuestions: totalQuestions, correctAnswers: correctAnswers,
-        score: score, topics: topics
-      }),
-    });
 
-    const response2 = await fetch(`${BaseApiUrl}/whatsapp`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ phone: '9922041218', text: `Hii Your Mocktest Result : ${message}` }),
-    });
-    const json = await response.json();
-    console.log( resultJson,json)
+
+    // const response3 = await fetch(`${BaseApiUrl}/user/`, {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //   },
+    // });
+
+    // const json3 = await response3.json();
+    // if (json3) {
+    //   console.log(json3.user.user.id);
+      // setData(json.user.user);
+
+      // dispatch(setUser(json.user));
+      // const response = await fetch(`${BaseApiUrl}/mocktest`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     userid: json3.user.user.id, testName: testName, totalQuestions: totalQuestions, correctAnswers: correctAnswers,
+      //     score: score, topics: topics
+      //   }),
+      // });
+
+      const response2 = await fetch(`${BaseApiUrl}/whatsapp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ phone: '9922041218', text: `Hii Your Mocktest Result : ${message}` }),
+      });
+      // const json = await response.json();
+      console.log(resultJson,)
+    // }
+
+
 
   }
+
+  
+  useEffect(() => {
+    sendData()
+  }, [])
 
   return (
     <div className="bg-white shadow-2xl rounded-2xl p-6 max-w-3xl mx-auto">
