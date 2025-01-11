@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
           <header className="flex h-16 items-center justify-between gap-4  p-4 bg-background">
             <div className="flex items-center gap-4">
               <SidebarTrigger />
-              <h1 className="text-xl font-semibold">Campus++ Dashboard</h1>
+              <h1 className="text-xl font-semibold text-blue-700">Campus++ Dashboard</h1>
             </div>
             <Button
               variant="default"
