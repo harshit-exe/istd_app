@@ -23,41 +23,40 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
 import {
   Settings,
   AreaChartIcon as ChartArea,
   Building2,
-  ClipboardList,
-  ListChecks,
   LogOut,
-  User,
-  X,
-  Focus,
   MessageSquareText,
-  Video,
-  Gamepad2,
-  BotMessageSquare,
-  Briefcase,
+  MonitorPlay,
+  FileText,
+  Users,
+  BookOpenCheck,
+  Code,
+  MailCheck,
+  FolderKanban,
+  CalendarCheck,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { BaseApiUrl } from "@/utils/constanst";
 
 const companyNav = [
-  { name: "Courses", icon: ClipboardList, link: "/dashboard/courses" },
-  { name: "Resume Generator", icon: ListChecks, link: "/dashboard/resume" },
-  { name: "Mentoring", icon: Video, link: "/dashboard/mentor" },
-  { name: "AI Mock Test", icon: BotMessageSquare, link: "/dashboard/mocktest" },
-  { name: "Mock Interview", icon: Settings, link: "/dashboard/mockinterview" },
-  { name: "Roadmap", icon: Briefcase, link: "/dashboard/roadmap" },
+  { name: "Courses", icon: MonitorPlay, link: "/dashboard/courses" },
+  { name: "Resume Generator", icon: FileText, link: "/dashboard/resume" },
+  { name: "Mentoring", icon: Users, link: "/dashboard/mentor" },
+  { name: "AI Mock Test", icon: BookOpenCheck, link: "/dashboard/mocktest" },
+  { name: "Code Editor", icon: Code, link: "/dashboard/editor" },
+  { name: "Mock Interview", icon: MailCheck, link: "/dashboard/mockinterview" },
+  { name: "Roadmap", icon: FolderKanban, link: "/dashboard/roadmap" },
   {
     name: "Discussion",
     icon: MessageSquareText,
     link: "/dashboard/discussion",
   },
-  { name: "AI Tutor", icon: BotMessageSquare, link: "/dashboard/aitutor" },
+  { name: "Events", icon: CalendarCheck, link: "/dashboard/events" },
   { name: "Settings", icon: Settings, link: "/dashboard/settings" },
 ];
 
@@ -146,17 +145,17 @@ export function CourseSidebar() {
             <Building2 size={18} />
             <AnimatePresence>
               {state === "expanded" && (
-                <Link href={'/dashboard'}>
-                <motion.h2
-                  className="font-medium"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.2 }}
+                <Link href={"/dashboard"}>
+                  <motion.h2
+                    className="font-medium"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.2 }}
                   >
-                  {data?.username}
-                </motion.h2>
-                  </Link>
+                    {data?.username}
+                  </motion.h2>
+                </Link>
               )}
             </AnimatePresence>
           </motion.div>
