@@ -153,7 +153,7 @@ Campus++ Team`
               </Button>
               <Button
                 className="flex-1 bg-green-600 hover:bg-green-700 text-white"
-                onClick={() => handleMetaverseJoin(mentor.name)}
+                // onClick={() => handleMetaverseJoin(mentor.name)}
               >
                 <Cube className="w-4 h-4 mr-2" />
                 Join in Metaverse
