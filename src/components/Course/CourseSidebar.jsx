@@ -93,7 +93,7 @@ export function CourseSidebar({ data }) {
         </div>
         <Link
          href={`/dashboard`}
-         className="mt-6 flex items-center space-x-3">
+         className="mt-6 flex items-center space-x-3 overflow-x-hidden">
           <Avatar  className="w-10 h-10 border-2 border-blue-500">
             <AvatarImage src={data?.pic} alt={data?.username} />
             <AvatarFallback>{data?.username?.charAt(0)}</AvatarFallback>
