@@ -31,8 +31,8 @@ const topics = [
   { name: 'AWS', icon: 'logos:aws' },
   { name: 'Azure', icon: 'logos:microsoft-azure' },
   { name: 'Git', icon: 'logos:git-icon' },
-  { name: 'Machine Learning', icon: 'carbon:machine-learning-model' },
-  { name: 'Artificial Intelligence', icon: 'carbon:ai-status' }
+  { name: 'M.L', icon: 'carbon:machine-learning-model' },
+  { name: 'A.I', icon: 'carbon:ai-status' }
 ]
 
 const timeframeOptions = [
@@ -75,7 +75,7 @@ export default function RoadmapForm({ setRoadmapData, onComplete }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       <div>
-        <Label htmlFor="topics" className="text-lg font-medium text-gray-700 mb-3">Select Topics (Multiple):</Label>
+        <Label htmlFor="topics" className="text-lg font-medium text-gray-700 mb-6">Select Multiple Topics :</Label>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {topics.map((t) => (
             <Button
@@ -83,9 +83,9 @@ export default function RoadmapForm({ setRoadmapData, onComplete }) {
               type="button"
               onClick={() => handleTopicToggle(t.name)}
               variant={selectedTopics.includes(t.name) ? "default" : "outline"}
-              className="flex items-center justify-center h-20"
+              className="flex items-center justify-center h-20 text-lg"
             >
-              {t.icon && <Icon icon={t.icon} className="w-6 h-6 mr-2" />}
+              {t.icon && <Icon icon={t.icon} className=" w-6 h-6 mr-2" />}
               <span>{t.name}</span>
             </Button>
           ))}

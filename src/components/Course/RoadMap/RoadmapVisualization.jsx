@@ -171,7 +171,7 @@ export default function RoadmapVisualization({ roadmapData }) {
 
   return (
     <div className="mt-12">
-      <h2 className="text-3xl font-bold mb-6 text-blue-700">Your Learning Roadmap</h2>
+      <h2 className="text-3xl font-bold mb-6 text-black">Your Learning Roadmap</h2>
       <div className="h-[700px] border-4 border-indigo-200 rounded-xl overflow-hidden shadow-xl">
         <ReactFlow
           nodes={nodes}

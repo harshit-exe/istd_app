@@ -79,7 +79,7 @@ export default function AICrashCourseGenerator() {
   return (
     <div className="min-h-screen ">
       <div className="container mx-auto p-8">
-        <h1 className="text-6xl font-extrabold mb-8 text-center text-blue-600 drop-shadow-lg">
+        <h1 className="text-6xl font-extrabold mb-8 text-center text-black drop-shadow-lg">
           AI Crash Course Generator
         </h1>
         
@@ -110,7 +110,7 @@ export default function AICrashCourseGenerator() {
           </Card>
         </div>
 
-        <form onSubmit={handleSubmit} className="mb-8 bg-white/90 backdrop-blur-md p-6 rounded-xl shadow-xl">
+        <form onSubmit={handleSubmit} className="mb-8 bg-white/90 backdrop-blur-md p-8 rounded-xl shadow-xl">
           <div className="flex flex-col md:flex-row gap-4">
             <Input
               type="text"
