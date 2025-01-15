@@ -66,10 +66,10 @@ export default function CourseChat({ course }) {
   }
 
   return (
-    <Card className="h-[600px] flex flex-col">
-      <CardHeader>
-        <CardTitle className="flex items-center">
-          <Send className="mr-2" />
+    <Card className="h-[70vh] flex flex-col bg-white/90 backdrop-blur-md shadow-xl rounded-xl overflow-hidden">
+      <CardHeader className="bg-gradient-to-r from-blue-500 to-pink-500 text-white">
+        <CardTitle className="flex items-center text-2xl">
+          <Send className="mr-3 h-6 w-6" />
           Course Chat
         </CardTitle>
       </CardHeader>
@@ -78,7 +78,7 @@ export default function CourseChat({ course }) {
           {messages.map((message, index) => (
             <div key={index} className={`mb-4 flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div className={`flex items-start ${message.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                <div className={`p-2 rounded-lg max-w-[80%] ${message.role === 'user' ? 'bg-blue-100' : 'bg-gray-100'}`}>
+                <div className={`p-3 rounded-xl max-w-[80%] ${message.role === 'user' ? 'bg-blue-100' : 'bg-pink-100'}`}>
                   {message.role === 'assistant' && message.isTyping ? (
                     <Typewriter text={message.content} />
                   ) : (
@@ -109,33 +109,38 @@ export default function CourseChat({ course }) {
                     </>
                   )}
                 </div>
-                <div className={`flex items-center justify-center w-8 h-8 rounded-full ${message.role === 'user' ? 'bg-blue-500 ml-2' : 'bg-gray-500 mr-2'}`}>
-                  {message.role === 'user' ? <User className="text-white w-5 h-5" /> : <Bot className="text-white w-5 h-5" />}
+                <div className={`flex items-center justify-center w-10 h-10 rounded-full ${message.role === 'user' ? 'bg-blue-500 ml-3' : 'bg-pink-500 mr-3'}`}>
+                  {message.role === 'user' ? <User className="text-white w-6 h-6" /> : <Bot className="text-white w-6 h-6" />}
                 </div>
               </div>
             </div>
           ))}
           {isLoading && (
             <div className="flex justify-start mb-4">
-              <div className="bg-gray-100 p-2 rounded-lg">
-                <Loader2 className="h-5 w-5 animate-spin text-gray-500" />
+              <div className="bg-pink-100 p-2 rounded-xl">
+                <Loader2 className="h-5 w-5 animate-spin text-pink-500" />
               </div>
             </div>
           )}
         </ScrollArea>
-        <form onSubmit={handleSubmit} className="flex gap-2">
+        <form onSubmit={handleSubmit} className="flex gap-3 mt-4">
           <Input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask a question about the course..."
-            className="flex-grow"
+            className="flex-grow text-lg rounded-xl border-2 border-blue-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
           />
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Send'}
+          <Button 
+            type="submit" 
+            disabled={isLoading}
+            className="bg-gradient-to-r from-blue-500 to-pink-500 hover:from-blue-600 hover:to-pink-600 text-white font-bold py-2 px-6 rounded-xl transition duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Send'}
           </Button>
         </form>
       </CardContent>
     </Card>
   )
 }
+

@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { FloatingBubbleMenu } from "./FloatingBubbleMenu";
 
 const companyNav = [
   {
@@ -70,9 +71,13 @@ export function CourseSidebar({ data }) {
   const { state } = useSidebar();
   const [activeItem, setActiveItem] = useState(null);
 
+  const handleItemClick = (item) => {
+    setActiveItem(activeItem === item.name ? null : item.name);
+  };
+
   return (
     <Sidebar className={cn(
-      " border-r border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-800 transition-all duration-300 ease-in-out",
+      "border-r border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-800 transition-all duration-300 ease-in-out",
       state === "collapsed" ? "w-16" : "w-64"
     )}>
       <SidebarHeader className="p-4">
@@ -94,7 +99,7 @@ export function CourseSidebar({ data }) {
         <Link
          href={`/dashboard`}
          className="mt-6 flex items-center space-x-3 overflow-x-hidden">
-          <Avatar  className="w-10 h-10 border-2 border-blue-500">
+          <Avatar className="w-10 h-10 border-2 border-blue-500">
             <AvatarImage src={data?.pic} alt={data?.username} />
             <AvatarFallback>{data?.username?.charAt(0)}</AvatarFallback>
           </Avatar>
@@ -111,7 +116,7 @@ export function CourseSidebar({ data }) {
         </Link>
       </SidebarHeader>
       <Separator className="my-2" />
-      <SidebarContent className="px-3 overflow-x-hidden">
+      <SidebarContent className="px-3 overflow-y-auto">
         <SidebarMenu>
           {companyNav.map((item) => (
             <SidebarMenuItem key={item.name}>
@@ -121,12 +126,12 @@ export function CourseSidebar({ data }) {
                     <SidebarMenuButton
                       asChild
                       className={cn(
-                        " w-full justify-start rounded-lg transition-all duration-200 ease-in-out",
+                        "w-full justify-start rounded-lg transition-all duration-200 ease-in-out",
                         activeItem === item.name
                           ? "bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-200 font-semibold"
                           : "hover:bg-gray-100 dark:hover:bg-gray-800"
                       )}
-                      onClick={() => setActiveItem(activeItem === item.name ? null : item.name)}
+                      onClick={() => handleItemClick(item)}
                     >
                       <div className={cn("flex items-center py-2 px-3", state === "collapsed" && "justify-center")}>
                         <Icon icon={item.icon} className={cn(
@@ -139,15 +144,6 @@ export function CourseSidebar({ data }) {
                         {state === "expanded" && (
                           <span className="text-sm font-medium">{item.name}</span>
                         )}
-                        {item.children && state === "expanded" && (
-                          <Icon
-                            icon="fluent:chevron-down-24-regular"
-                            className={cn(
-                              "ml-auto w-4 h-4 transition-transform duration-200",
-                              activeItem === item.name ? "transform rotate-180" : ""
-                            )}
-                          />
-                        )}
                       </div>
                     </SidebarMenuButton>
                   </TooltipTrigger>
@@ -156,48 +152,19 @@ export function CourseSidebar({ data }) {
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-              {item.children && state === "expanded" && (
-                <AnimatePresence>
-                  {activeItem === item.name && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                    >
-                      <SidebarMenu className="ml-4 mt-1">
-                        {item.children.map((child) => (
-                          <SidebarMenuItem key={child.name}>
-                            <TooltipProvider>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <SidebarMenuButton
-                                    asChild
-                                    className="w-full justify-start rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-                                  >
-                                    <Link
-                                      href={child.link}
-                                      className="flex items-center py-2 px-3"
-                                    >
-                                      <Icon icon={child.icon} className="w-4 h-4 mr-3 text-gray-400" />
-                                      <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                                        {child.name}
-                                      </span>
-                                    </Link>
-                                  </SidebarMenuButton>
-                                </TooltipTrigger>
-                                <TooltipContent side="right" className="bg-gray-800 text-white py-1 px-2 text-xs rounded">
-                                  <p>{child.name}</p>
-                                </TooltipContent>
-                              </Tooltip>
-                            </TooltipProvider>
-                          </SidebarMenuItem>
-                        ))}
-                      </SidebarMenu>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              )}
+              <AnimatePresence>
+                {activeItem === item.name && item.children && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden ml-6 mt-2"
+                  >
+                    <FloatingBubbleMenu items={item.children} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>

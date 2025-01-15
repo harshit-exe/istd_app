@@ -42,7 +42,7 @@ export default function CourseSection() {
   return (
     <div className=" py-12 px-4 sm:px-6 lg:px-8 min-h-screen">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
+        <h2 className="text-3xl font-bold text-center text-blue-700 mb-8">
           Premium Courses
         </h2>
         {/* ... search and filter UI remains unchanged */}

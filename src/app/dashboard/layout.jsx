@@ -15,7 +15,6 @@ export default function DashboardLayout({ children }) {
     window.open("https://framevr.io/classroommmm", "_blank");
   };
 
-  // Mock data for the sidebar (replace with actual data fetching logic)
   const [data, setData] = useState([]);
 
   const fetchUser = async () => {
@@ -31,8 +30,6 @@ export default function DashboardLayout({ children }) {
     if (json) {
       console.log(json);
       setData(json.user.user);
-
-      // dispatch(setUser(json.user));
     }
   };
   
@@ -45,12 +42,12 @@ export default function DashboardLayout({ children }) {
       <div className="flex h-screen w-screen overflow-hidden bg-gray-50 dark:bg-gray-900">
         <CourseSidebar data={data} />
         <SidebarInset className="flex flex-col flex-grow">
-          <header className="flex h-16 items-center justify-between gap-4 border-b border-gray-200 bg-white px-6 dark:border-gray-700 dark:bg-gray-800">
+          <header className="flex h-16 items-center justify-between p-3 gap-4 border-b border-gray-200 bg-white px-6 dark:border-gray-700 dark:bg-gray-800">
             <div className="flex items-center gap-4">
               <SidebarTrigger className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
                 <Icon icon="fluent:list-24-filled" className="w-5 h-5 text-gray-600 dark:text-gray-300" />
               </SidebarTrigger>
-              <h1 className="text-xl font-semibold text-gray-800 dark:text-white">Campus++ Dashboard</h1>
+              <h1 className="text-xl font-semibold text-gray-800 dark:text-white">Campus<span className='text-blue-500'>++</span>  Dashboard</h1>
             </div>
             <Button
               variant="default"
@@ -58,10 +55,10 @@ export default function DashboardLayout({ children }) {
               onClick={handleVideoCall}
             >
               <Icon icon="fluent:video-24-filled" className="mr-2 h-4 w-4" />
-              Join VR Class
+              Join Metaverse
             </Button>
           </header>
-          <main className="flex-grow overflow-auto p-6">
+          <main className="flex-grow overflow-y-auto p-6">
             {children}
           </main>
         </SidebarInset>

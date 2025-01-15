@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 export default function TestSettings({ questionCount, setQuestionCount, timeLimit, setTimeLimit, testName, setTestName }) {
   return (
     <div className="mb-6">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Test Settings:</h2>
+      <h2 className="text-2xl font-bold mb-4 text-blue-600">Test Settings:</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <motion.div
           whileHover={{ scale: 1.05 }}
