@@ -1,4 +1,3 @@
-
 import MentorCards from '@/components/Course/MentorCards'
 import React from 'react'
 
