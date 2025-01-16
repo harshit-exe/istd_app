@@ -22,6 +22,9 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { FloatingBubbleMenu } from "./FloatingBubbleMenu";
+import { useRouter } from 'next/navigation';
+import { Button } from '../ui/button';
+import { LogOut } from 'lucide-react';
 
 const companyNav = [
   {
@@ -70,6 +73,13 @@ const companyNav = [
 export function CourseSidebar({ data }) {
   const { state } = useSidebar();
   const [activeItem, setActiveItem] = useState(null);
+  const router = useRouter()
+
+  const handleLogout = () => {
+    router.push('/login')
+    localStorage.clear()
+  }
+
 
   const handleItemClick = (item) => {
     setActiveItem(activeItem === item.name ? null : item.name);
@@ -170,6 +180,19 @@ export function CourseSidebar({ data }) {
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter className="p-4 mt-auto">
+      <motion.div 
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
+              onClick={handleLogout}
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              {state === 'expanded' && <span className="text-sm font-medium">Logout</span>}
+            </Button>
+          </motion.div>
         <Separator className="mb-4" />
         <div className="text-xs text-center text-gray-500 dark:text-gray-400">
           © 2023 Campus++
