@@ -116,7 +116,7 @@ export function CourseSidebar({ data }) {
         </Link>
       </SidebarHeader>
       <Separator className="my-2" />
-      <SidebarContent className="px-3 overflow-y-auto">
+      <SidebarContent className="px-3 overflow-y-hidden">
         <SidebarMenu>
           {companyNav.map((item) => (
             <SidebarMenuItem key={item.name}>
@@ -126,7 +126,7 @@ export function CourseSidebar({ data }) {
                     <SidebarMenuButton
                       asChild
                       className={cn(
-                        "w-full justify-start rounded-lg transition-all duration-200 ease-in-out",
+                        "w-full justify-start rounded-lg transition-all duration-200 ease-in-out mb-5 ",
                         activeItem === item.name
                           ? "bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-200 font-semibold"
                           : "hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -135,14 +135,14 @@ export function CourseSidebar({ data }) {
                     >
                       <div className={cn("flex items-center py-2 px-3", state === "collapsed" && "justify-center")}>
                         <Icon icon={item.icon} className={cn(
-                          "w-5 h-5",
+                          "w-10 h-10",
                           state === "expanded" ? "mr-3" : "mx-auto",
                           activeItem === item.name
                             ? "text-blue-600 dark:text-blue-400"
                             : "text-gray-600 dark:text-gray-400"
                         )} />
                         {state === "expanded" && (
-                          <span className="text-sm font-medium">{item.name}</span>
+                          <span className="text-base font-medium">{item.name}</span>
                         )}
                       </div>
                     </SidebarMenuButton>

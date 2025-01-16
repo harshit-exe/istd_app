@@ -13,7 +13,7 @@ export default function TopicSelector({ selectedTopics, setSelectedTopics }) {
 
   return (
     <div className="mb-8">
-      <h2 className="text-2xl font-bold mb-4 text-blue-600">Select Topics:</h2>
+      <h2 className="text-2xl font-bold mb-4 text-black">Select Topics:</h2>
       <div className="flex flex-wrap gap-3">
         {topics.map(topic => (
           <motion.button

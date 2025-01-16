@@ -13,12 +13,12 @@ export default function Home() {
   const toggleForm = () => setShowForm(!showForm)
 
   return (
-    <div className="min-h-screen  py-12">
+    <div className="min-h-screen  py-1">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-5xl font-bold mb-12 text-center text-black tracking-tight">
           Custom Roadmap Generator
         </h1>
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-6">
           {showForm ? (
             <RoadmapForm setRoadmapData={setRoadmapData} onComplete={() => setShowForm(false)} />
           ) : (

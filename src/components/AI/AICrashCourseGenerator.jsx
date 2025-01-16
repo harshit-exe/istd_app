@@ -117,12 +117,12 @@ export default function AICrashCourseGenerator() {
               value={input}
               onChange={handleInputChange}
               placeholder="Enter a topic or URL"
-              className="flex-grow text-lg rounded-xl border-2 border-blue-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+              className="flex-grow py-6 text-lg rounded-xl border-2 border-blue-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
             />
             <Button 
               type="submit" 
               disabled={isLoading || isScrapingLoading}
-              className="bg-gradient-to-r from-blue-500 to-pink-500 hover:from-blue-600 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-xl transition duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-gradient-to-r from-blue-500 to-pink-500 hover:from-blue-600 hover:to-pink-600 text-white font-bold py-6 px-6 rounded-xl transition duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading || isScrapingLoading ? (
                 <>
