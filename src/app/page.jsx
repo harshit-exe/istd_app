@@ -46,7 +46,7 @@ const page = () => {
       <div className="">
         <NavBar />
         <section className="px-20 flex justify-center items-center flex-col">
-          <h1 className="text-5xl text-center font-medium mt-10 capitalize">
+          <h1 className="text-4xl text-center font-medium mt-10 capitalize">
             Learn Smarter with AI-Powered <br /> Virtual Education Anywhere in
             India
           </h1>
