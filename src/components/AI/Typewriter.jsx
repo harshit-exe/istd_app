@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 
-export default function Typewriter({ text, delay = 20 }) {
+export default function Typewriter({ text, delay = 3 }) {
   const [currentText, setCurrentText] = useState('')
   const [currentIndex, setCurrentIndex] = useState(0)
 
