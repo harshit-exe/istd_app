@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata = {
   title: "Campus++",
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
         <Toaster position="top-left" expand={false} richColors />
         <NextTopLoader/>
         {children}
+        <Analytics/>
       </body>
     </html>
   );

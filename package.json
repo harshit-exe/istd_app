@@ -29,6 +29,7 @@
     "@react-three/drei": "^9.90.0",
     "@react-three/fiber": "^8.15.0",
     "@types/dagre": "^0.7.52",
+    "@vercel/analytics": "^1.4.1",
     "@zegocloud/zego-uikit-prebuilt": "^2.14.0",
     "axios": "^1.7.9",
     "babel-loader": "^9.2.1",
