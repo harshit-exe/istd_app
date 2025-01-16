@@ -45,7 +45,11 @@ export function useGroqAI() {
     const messages = [
       { role: 'system', content: 'You are an AI coding assistant that generates concise coding tasks, hints, and solutions.' },
       { role: 'user', content: `Generate a ${prompt}. 
-      If it's a task, include a brief description, the task itself, and expected output. Ensure the task is solvable within the browser environment for JavaScript. Keep the task description concise.
+      If it's a task, include three sections separated by two newlines:
+      1. A brief task description
+      2. Detailed instructions and requirements
+      3. An example input/output or usage scenario
+      Ensure the task is solvable within the browser environment for JavaScript. Keep each section concise.
       If it's a hint, provide a helpful tip without giving away the full solution. 
       If it's a full solution, provide complete, working code with inline comments explaining the solution. 
       Structure the code properly with appropriate indentation and formatting.` }

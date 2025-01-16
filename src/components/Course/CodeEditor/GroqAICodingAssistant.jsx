@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Loader2, Code, Lightbulb, RefreshCw, Play } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
@@ -22,6 +22,8 @@ const languages = [
 const GroqAICodingAssistant = () => {
   const [language, setLanguage] = useState('javascript')
   const [task, setTask] = useState('')
+  const [details, setDetails] = useState('')
+  const [example, setExample] = useState('')
   const [code, setCode] = useState('')
   const [output, setOutput] = useState('')
   const [feedback, setFeedback] = useState('')
@@ -36,7 +38,10 @@ const GroqAICodingAssistant = () => {
 
   const handleGenerateTask = async () => {
     const newTask = await generateTask(language)
-    setTask(newTask.replace(/\*\*/g, ''))
+    const [taskDescription, taskDetails, taskExample] = newTask.split('\n\n')
+    setTask(taskDescription.replace(/\*\*/g, ''))
+    setDetails(taskDetails.replace(/\*\*/g, ''))
+    setExample(taskExample.replace(/\*\*/g, ''))
     setCode('')
     setOutput('')
     setFeedback('')
@@ -52,7 +57,7 @@ const GroqAICodingAssistant = () => {
   const handleShowHint = async () => {
     if (!showHint) {
       const hint = await generateTask(language + ' hint')
-      setTask(prevTask => prevTask + '\n\nHint: ' + hint.replace(/\*\*/g, ''))
+      setDetails(prevDetails => prevDetails + '\n\nHint: ' + hint.replace(/\*\*/g, ''))
       setShowHint(true)
     }
   }
@@ -101,11 +106,11 @@ const GroqAICodingAssistant = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-4 space-y-6">
+    <div className="max-w-9xl mx-auto p-2 space-y-6">
       <Card className="shadow-lg">
-        <CardHeader className=" text-blue-500">
+        <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-500 text-white">
           <CardTitle className="flex justify-between items-center">
-            <span className="text-2xl">Coding Challenge</span>
+            <span className="text-2xl font-bold">AI Coding Assistant</span>
             <Select value={language} onValueChange={setLanguage}>
               <SelectTrigger className="w-[140px] bg-white text-black">
                 <SelectValue placeholder="Language" />
@@ -122,14 +127,25 @@ const GroqAICodingAssistant = () => {
         </CardHeader>
         <CardContent className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="space-y-4">
-            <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="task">
-                <AccordionTrigger>Task Description</AccordionTrigger>
-                <AccordionContent>
-                  <p className="whitespace-pre-wrap">{task || 'Click "New Challenge" to get started.'}</p>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+            <Tabs defaultValue="task" className="w-full">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="task">Task</TabsTrigger>
+                <TabsTrigger value="details">Details</TabsTrigger>
+                <TabsTrigger value="example">Example</TabsTrigger>
+              </TabsList>
+              <TabsContent value="task" className="p-4 bg-gray-100 rounded-lg">
+                <h3 className="font-bold mb-2">Task:</h3>
+                <p className="whitespace-pre-wrap">{task || 'Click "New Challenge" to get started.'}</p>
+              </TabsContent>
+              <TabsContent value="details" className="p-4 bg-gray-100 rounded-lg">
+                <h3 className="font-bold mb-2">Details:</h3>
+                <p className="whitespace-pre-wrap">{details || 'No additional details available.'}</p>
+              </TabsContent>
+              <TabsContent value="example" className="p-4 bg-gray-100 rounded-lg">
+                <h3 className="font-bold mb-2">Example:</h3>
+                <pre className="whitespace-pre-wrap bg-gray-200 p-2 rounded">{example || 'No example available.'}</pre>
+              </TabsContent>
+            </Tabs>
             <div className="flex justify-between">
               <TooltipProvider>
                 <Tooltip>
@@ -193,15 +209,15 @@ const GroqAICodingAssistant = () => {
               }}
             />
             <div className="flex justify-between">
-              <Button onClick={handleEvaluateCode} disabled={isLoading || !code} className="bg-green-500 hover:bg-green-600">
+              <Button onClick={handleEvaluateCode} disabled={isLoading || !code} className="bg-green-500 hover:bg-green-600 text-white">
                 {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                 Evaluate Code
               </Button>
-              <Button onClick={handleRunCode} disabled={isLoading || !code} className="bg-yellow-500 hover:bg-yellow-600">
+              <Button onClick={handleRunCode} disabled={isLoading || !code} className="bg-yellow-500 hover:bg-yellow-600 text-white">
                 <Play className="mr-2 h-4 w-4" />
                 Run Code
               </Button>
-              <Button onClick={handleGenerateTask} disabled={isLoading} className="bg-blue-500 hover:bg-blue-600">
+              <Button onClick={handleGenerateTask} disabled={isLoading} className="bg-blue-500 hover:bg-blue-600 text-white">
                 {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
                 New Challenge
               </Button>
